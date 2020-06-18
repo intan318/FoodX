@@ -1,6 +1,5 @@
 package com.example.foodxdonatur
 
-import android.app.Dialog
 import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,13 +7,11 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import androidx.appcompat.app.AlertDialog
 import com.example.foodxdonatur.model.RegisterResponse
+import com.example.foodxdonatur.utils.DialogView
 import kotlinx.android.synthetic.main.activity_register.*
-import kotlinx.android.synthetic.main.activity_register.view.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.longToast
 import org.jetbrains.anko.okButton
 
 class RegisterActivity : AppCompatActivity(), RegisterView {
