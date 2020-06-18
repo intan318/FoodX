@@ -1,8 +1,9 @@
-package com.example.foodxdonatur
+package com.example.foodxdonatur.utils
 
 import android.app.Activity
 import android.app.Dialog
 import android.view.Window
+import com.example.foodxdonatur.R
 
 class DialogView (private var activity: Activity){
 

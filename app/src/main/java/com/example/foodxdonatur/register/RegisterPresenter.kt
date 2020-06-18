@@ -1,13 +1,11 @@
-package com.example.foodxdonatur
+package com.example.foodxdonatur.register
 
 import android.annotation.SuppressLint
 import android.content.Context
 import com.example.foodxdonatur.network.ApiFactory
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import okhttp3.Dispatcher
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import java.lang.Exception

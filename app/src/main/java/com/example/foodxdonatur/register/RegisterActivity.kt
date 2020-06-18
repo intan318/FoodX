@@ -1,4 +1,4 @@
-package com.example.foodxdonatur
+package com.example.foodxdonatur.register
 
 import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +7,8 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import com.example.foodxdonatur.LoginActivity
+import com.example.foodxdonatur.R
 import com.example.foodxdonatur.model.RegisterResponse
 import com.example.foodxdonatur.utils.DialogView
 import kotlinx.android.synthetic.main.activity_register.*
@@ -14,7 +16,8 @@ import org.jetbrains.anko.alert
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.okButton
 
-class RegisterActivity : AppCompatActivity(), RegisterView {
+class RegisterActivity : AppCompatActivity(),
+    RegisterView {
 
     private lateinit var registerPresenter: RegisterPresenter
     private lateinit var dialog: DialogInterface
@@ -28,7 +31,8 @@ class RegisterActivity : AppCompatActivity(), RegisterView {
         setContentView(R.layout.activity_register)
 
         dialogView = DialogView(this)
-        registerPresenter = RegisterPresenter(this, this)
+        registerPresenter =
+            RegisterPresenter(this, this)
         handleRegister()
 
         val dropdown = findViewById<Spinner>(R.id.spinnerJenKelRegister)

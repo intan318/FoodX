@@ -1,4 +1,4 @@
-package com.example.foodxdonatur
+package com.example.foodxdonatur.register
 
 import com.example.foodxdonatur.model.RegisterResponse
 
