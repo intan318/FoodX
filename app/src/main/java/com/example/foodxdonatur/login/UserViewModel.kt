@@ -12,6 +12,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import org.jetbrains.anko.doAsync
 import kotlin.coroutines.CoroutineContext
 
 class UserViewModel(application: Application): AndroidViewModel(application) {
@@ -37,6 +38,14 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
 
     fun insertUser(user: UserDB) = scope.launch(Dispatchers.IO){
 //        Log.e("INSERT DATA", )
-        userRepository.insert(user)
+        doAsync {
+            userRepository.insert(user)
+        }
     }
+
+
+    fun deleteAll(){
+        userRepository.deleteAll()
+    }
+
 }
