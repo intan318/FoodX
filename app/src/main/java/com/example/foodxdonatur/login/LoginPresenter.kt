@@ -1,14 +1,12 @@
-package com.example.foodxdonatur
+package com.example.foodxdonatur.login
 
 import android.content.Context
-import com.example.foodxdonatur.model.UserResponse
+import com.example.foodxdonatur.login.LoginView
 import com.example.foodxdonatur.network.ApiFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.withContext
 import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
 import java.lang.Exception
 

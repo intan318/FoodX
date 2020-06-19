@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName
 
 data class KomunitasResponse(
     @SerializedName("komunitas")
-    var komunitas: List<Komunita?>?
+    var komunitas: List<Komunitas?>?
 ) {
-    data class Komunita(
+    data class Komunitas(
         @SerializedName("created_at")
         var createdAt: String?,
         @SerializedName("foto_komunitas")

@@ -4,10 +4,7 @@ import com.example.foodxdonatur.model.RegisterResponse
 import com.example.foodxdonatur.model.UserResponse
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.Headers
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface ApiServices {
 
@@ -18,8 +15,8 @@ interface ApiServices {
         @Field("name") name: String?,
         @Field("email") email: String?,
         @Field("password") password: String?,
-        @Field("no_telp") no_telp : String?,
-        @Field("jenis_kelamin") jenis_kelamin : String?,
+        @Field("no_telp") noTelp : String?,
+        @Field("jenis_kelamin") jenisKelamin : String?,
         @Field("alamat") alamat: String?
     ): Deferred<Response<RegisterResponse>>
 
@@ -31,8 +28,16 @@ interface ApiServices {
         @Field("password") password: String
     ): Deferred<Response<UserResponse>>
 
-//    @FormUrlEncoded
-//    @Headers("Accept: application/json")
-//    @POST("createdonasi")
-//    fun createdonasi():
+
+    @Headers("Accept: application/json")
+    @GET("komunitas")
+    fun komunitas(
+        @Field("name") name: String?,
+        @Field("email") email: String?,
+        @Field("no_telp") noTelp: String?,
+        @Field("alamat") alamat: String?,
+        @Field("foto_komunitas") fotoKomunitas: String
+    )
+
+
 }

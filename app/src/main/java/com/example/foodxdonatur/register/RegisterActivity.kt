@@ -7,7 +7,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import com.example.foodxdonatur.LoginActivity
+import com.example.foodxdonatur.login.LoginActivity
 import com.example.foodxdonatur.R
 import com.example.foodxdonatur.model.RegisterResponse
 import com.example.foodxdonatur.utils.DialogView

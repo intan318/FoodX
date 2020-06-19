@@ -1,4 +1,8 @@
 package com.example.foodxdonatur.adapter
 
-class KomunitasRecyclerAdapter {
+import android.content.Context
+
+class KomunitasRecyclerAdapter() {
+
+
 }

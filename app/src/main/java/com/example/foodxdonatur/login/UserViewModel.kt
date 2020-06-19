@@ -1,4 +1,4 @@
-package com.example.foodxdonatur
+package com.example.foodxdonatur.login
 
 import android.app.Application
 import android.util.Log

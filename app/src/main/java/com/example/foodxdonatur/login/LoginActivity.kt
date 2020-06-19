@@ -1,4 +1,4 @@
-package com.example.foodxdonatur
+package com.example.foodxdonatur.login
 
 import android.content.DialogInterface
 import android.content.Intent
@@ -6,14 +6,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.ViewModelProviders
+import com.example.foodxdonatur.MainActivity
+import com.example.foodxdonatur.R
 import com.example.foodxdonatur.database.UserDB
 import com.example.foodxdonatur.model.UserResponse
 import com.example.foodxdonatur.utils.DialogView
 import com.example.foodxdonatur.utils.SessionManager
 import kotlinx.android.synthetic.main.activity_login.*
-import org.jetbrains.anko.email
 
-class LoginActivity : AppCompatActivity(), LoginView{
+class LoginActivity : AppCompatActivity(),
+    LoginView {
 
     private lateinit var loginPresenter: LoginPresenter
 //    private lateinit var session: SessionManager
@@ -26,7 +28,8 @@ class LoginActivity : AppCompatActivity(), LoginView{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        loginPresenter = LoginPresenter(this, this)
+        loginPresenter =
+            LoginPresenter(this, this)
         dialogView = DialogView(this)
         
         userViewModel = ViewModelProviders.of(this).get(UserViewModel::class.java)
@@ -64,7 +67,8 @@ class LoginActivity : AppCompatActivity(), LoginView{
 
     private fun doRequest(){
         Log.i("test", "dorequest")
-        loginPresenter = LoginPresenter(this, this)
+        loginPresenter =
+            LoginPresenter(this, this)
         loginPresenter.login(editTextEmail.text.toString(), editTextPassword.text.toString())
     }
 
