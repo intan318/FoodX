@@ -2,7 +2,7 @@ package com.example.foodxdonatur.register
 
 import android.annotation.SuppressLint
 import android.content.Context
-import com.example.foodxdonatur.network.ApiFactory
+import com.example.foodxdonatur.network.APIFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -12,7 +12,7 @@ import java.lang.Exception
 
 class RegisterPresenter(val context: Context, var view: RegisterView) {
 
-    private val service = ApiFactory.makeRetrofitService()
+    private val service = APIFactory.makeRetrofitService()
 
     @SuppressLint("SimpleDateFormat")
     fun register(nama: String, email: String, password: String, no_telp: String, jenis_kelamin: String, alamat: String){

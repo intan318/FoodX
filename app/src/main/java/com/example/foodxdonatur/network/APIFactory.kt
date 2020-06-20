@@ -7,16 +7,16 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-object ApiFactory {
-    private const val BASE_URL: String = "http://192.168.100.147:8000/api/"
+object APIFactory {
+    private const val BASE_URL: String = "http://10.107.169.132:8000/api/"
 
-    fun makeRetrofitService(): ApiServices {
+    fun makeRetrofitService(): APIServices {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(makeOkHttpClient())
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
-            .build().create(ApiServices::class.java)
+            .build().create(APIServices::class.java)
     }
 
     private fun makeOkHttpClient(): OkHttpClient {

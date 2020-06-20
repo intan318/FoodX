@@ -10,6 +10,7 @@ import com.example.foodxdonatur.MainActivity
 import com.example.foodxdonatur.R
 import com.example.foodxdonatur.database.UserDB
 import com.example.foodxdonatur.model.UserResponse
+import com.example.foodxdonatur.register.RegisterActivity
 import com.example.foodxdonatur.utils.DialogView
 import com.example.foodxdonatur.utils.SessionManager
 import kotlinx.android.synthetic.main.activity_login.*
@@ -42,6 +43,11 @@ class LoginActivity : AppCompatActivity(),
                 doRequest()
             }
 
+        }
+
+        txtSignUp.setOnClickListener{
+            val intentToRegister = Intent(this,RegisterActivity::class.java)
+            startActivity(intentToRegister)
         }
     }
 

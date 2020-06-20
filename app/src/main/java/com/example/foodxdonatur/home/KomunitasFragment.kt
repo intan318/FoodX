@@ -1,4 +1,4 @@
-package com.example.foodxdonatur.fragment
+package com.example.foodxdonatur.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.foodxdonatur.R
 
-class HomeFragment : Fragment() {
+class KomunitasFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

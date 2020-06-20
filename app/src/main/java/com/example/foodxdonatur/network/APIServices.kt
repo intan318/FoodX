@@ -1,12 +1,13 @@
 package com.example.foodxdonatur.network
 
+import com.example.foodxdonatur.model.KomunitasResponse
 import com.example.foodxdonatur.model.RegisterResponse
 import com.example.foodxdonatur.model.UserResponse
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.*
 
-interface ApiServices {
+interface APIServices {
 
     @FormUrlEncoded
     @Headers("Accept: application/json")
@@ -31,13 +32,13 @@ interface ApiServices {
 
     @Headers("Accept: application/json")
     @GET("komunitas")
-    fun komunitas(
+    fun getKomunitas(
         @Field("name") name: String?,
         @Field("email") email: String?,
         @Field("no_telp") noTelp: String?,
         @Field("alamat") alamat: String?,
         @Field("foto_komunitas") fotoKomunitas: String
-    )
+    ): Deferred<Response<KomunitasResponse>>
 
 
 }

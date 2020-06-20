@@ -22,8 +22,9 @@ class UserRepository(private val userDao: UserDao){
 
     private class DeleteAllUsersAsyncTask internal constructor(private val mAsyncTaskDao: UserDao) :
         AsyncTask<Void, Void, Void>() {
+
         override fun doInBackground(vararg voids: Void): Void? {
-//            mAsyncTaskDao.deleteAll()
+            mAsyncTaskDao.deleteAll()
             return null
         }
     }

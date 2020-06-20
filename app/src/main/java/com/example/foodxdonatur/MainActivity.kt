@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.example.foodxdonatur.fragment.AccountFragment
 import com.example.foodxdonatur.fragment.HistoryFragment
-import com.example.foodxdonatur.fragment.HomeFragment
+import com.example.foodxdonatur.home.KomunitasFragment
 import com.example.foodxdonatur.fragment.NotificationFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         when(item.itemId){
             R.id.home -> {
                 println("homePressed")
-                replaceFragment(HomeFragment())
+                replaceFragment(KomunitasFragment())
                 return@OnNavigationItemSelectedListener true
             }
             R.id.history -> {

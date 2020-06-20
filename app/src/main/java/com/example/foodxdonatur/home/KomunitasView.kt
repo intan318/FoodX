@@ -1,4 +1,4 @@
-package com.example.foodxdonatur
+package com.example.foodxdonatur.home
 
 import com.example.foodxdonatur.model.KomunitasResponse
 

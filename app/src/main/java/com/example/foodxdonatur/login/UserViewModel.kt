@@ -24,14 +24,11 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
     private val scope = CoroutineScope(coroutineContext)
 
     private val userRepository: UserRepository
-
     val allUser: LiveData<List<UserDB>>
 
     init {
         val userDao = FoodXRoomDatabase.getDatabase(application, scope).userDao()
-
         userRepository = UserRepository(userDao)
-
         allUser = userRepository.all
     }
 
@@ -46,6 +43,10 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
 
     fun deleteAll(){
         userRepository.deleteAll()
+    }
+
+    fun delete(user: UserDB){
+        userRepository.deleteUser(user)
     }
 
 }

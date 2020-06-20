@@ -1,8 +1,7 @@
 package com.example.foodxdonatur.login
 
 import android.content.Context
-import com.example.foodxdonatur.login.LoginView
-import com.example.foodxdonatur.network.ApiFactory
+import com.example.foodxdonatur.network.APIFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -17,7 +16,7 @@ class LoginPresenter(val context: Context, val view: LoginView) {
 //    private var message = " "
 //    private var id = ""
 
-    private val service = ApiFactory.makeRetrofitService()
+    private val service = APIFactory.makeRetrofitService()
 
     fun login(email: String, password: String) {
 

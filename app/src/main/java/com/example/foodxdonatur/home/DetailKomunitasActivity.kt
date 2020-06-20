@@ -1,7 +1,8 @@
-package com.example.foodxdonatur
+package com.example.foodxdonatur.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.foodxdonatur.R
 
 class DetailKomunitasActivity : AppCompatActivity() {
 

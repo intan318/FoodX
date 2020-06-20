@@ -11,7 +11,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProviders
 import com.example.foodxdonatur.MainActivity
 import com.example.foodxdonatur.R
+import com.example.foodxdonatur.login.LoginActivity
 import com.example.foodxdonatur.login.UserViewModel
+import com.example.foodxdonatur.register.RegisterActivity
 import com.example.foodxdonatur.utils.DialogView
 import com.example.foodxdonatur.utils.SessionManager
 import kotlinx.android.synthetic.main.fragment_account.*
@@ -27,7 +29,7 @@ private const val ARG_PARAM2 = "param2"
 class AccountFragment : Fragment() {
     private lateinit var dialogView: DialogView
     private lateinit var dialog: DialogInterface
-    private lateinit var dialogAlertDialog: AlertDialog
+//    private lateinit var dialogAlertDialog: AlertDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,15 +66,15 @@ class AccountFragment : Fragment() {
               "Log out"){
                   okButton {
                       SessionManager.getInstance(this@AccountFragment.context!!).clear()
-                      val intent = Intent(activity, MainActivity::class.java)
+                      val intent = Intent(activity, LoginActivity::class.java)
                       intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                       userViewModel.deleteAll()
                       startActivity(intent)
                       activity?.finish()
-                      toast("Anda sudah keluar akun")
+//                      toast("Anda sudah keluar akun")
                   }
                   cancelButton {
-                      dialogAlertDialog.dismiss()
+                      dialog.dismiss()
                   }
               }.show()
 
