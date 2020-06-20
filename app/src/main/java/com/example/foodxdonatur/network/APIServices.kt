@@ -37,7 +37,7 @@ interface APIServices {
         @Field("email") email: String?,
         @Field("no_telp") noTelp: String?,
         @Field("alamat") alamat: String?,
-        @Field("foto_komunitas") fotoKomunitas: String
+        @Field("foto_komunitas") fotoKomunitas: String?
     ): Deferred<Response<KomunitasResponse>>
 
 

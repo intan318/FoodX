@@ -8,36 +8,47 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 import java.lang.Exception
 
 class KomunitasPresenter(val context: Context, val view: KomunitasView) {
-//
-//    private var service: APIServices = APIFactory.makeRetrofitService(context)
-//    var job: Job? = null
-//
-//    fun getKomunitas(page: Int){
-//        view.isLoading()
-//        GlobalScope.launch(Dispatchers.Main) {
-//            try {
-//                val data = service.getKomunitas(page)
-//                val result = data.await()
-//
-//                when {
-//                    result.code() == 401 || result.body()?.message == "Unauthorized" -> {
-//                        view.onUnAuthorized()
-//                    }
-//                    result.code() == 204 -> {
-//                        view.onEmptyData()
-//                    }
-//                    else -> {
-//                        view.onResults(result.body())
-//                    }
-//                }
-//                view.stopLoading()
-//            } catch (e: Exception) {
-//                Log.e("Error fetching komunitas", e.message.toString())
-//                view.stopLoading()
-//            }
-//        }
-//    }
+
+    private var service: APIServices = APIFactory.makeRetrofitService()
+    var job: Job? = null
+
+    fun getKomunitas(
+        name: String? = null,
+        email: String? = null,
+        noTelp: String? = null,
+        alamat: String? = null,
+        fotoKomunitas: String? = null
+    ){
+        view.isLoading()
+
+        doAsync {
+            GlobalScope.launch(Dispatchers.Main){
+                try {
+                  val data = service.getKomunitas(
+                      name = name,
+                      email = email,
+                      noTelp = noTelp,
+                      alamat = alamat,
+                      fotoKomunitas = fotoKomunitas
+                  )
+                  val result = data.await()
+                    uiThread {
+                        view.showKomunitas(result.body())
+                        view.stopLoading()
+                    }
+                } catch (e: Exception){
+                    uiThread {
+                        view.stopLoading()
+                    }
+
+                }
+            }
+        }
+
+    }
 }
