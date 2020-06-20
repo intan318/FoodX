@@ -14,5 +14,7 @@ class UserDB(
     @ColumnInfo(name = "alamat")
     var alamat: String? = null,
     @ColumnInfo(name = "no_telp")
-    var no_telp: String? = null
+    var no_telp: String? = null,
+    @ColumnInfo(name = "jenis_kelamin")
+    var jenis_kelamin: String? = null
 )

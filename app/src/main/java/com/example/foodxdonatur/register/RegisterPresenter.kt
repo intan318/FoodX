@@ -15,7 +15,7 @@ class RegisterPresenter(val context: Context, var view: RegisterView) {
     private val service = APIFactory.makeRetrofitService()
 
     @SuppressLint("SimpleDateFormat")
-    fun register(nama: String, email: String, password: String, no_telp: String, jenis_kelamin: String, alamat: String){
+    fun register(nama: String, email: String, password: String, noTelp: String, jenisKelamin: String, alamat: String){
 
         view?.onLoading()
 
@@ -23,7 +23,7 @@ class RegisterPresenter(val context: Context, var view: RegisterView) {
             try {
                 runBlocking {
                     launch(Dispatchers.IO) {
-                        val data = service.registDonatur(nama, email, password, no_telp, jenis_kelamin, alamat)
+                        val data = service.registDonatur(nama, email, password, noTelp, jenisKelamin, alamat)
                         val result = data.await()
 
                         uiThread {

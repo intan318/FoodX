@@ -60,17 +60,16 @@ class RegisterActivity : AppCompatActivity(),
             val nama = inputEditFullName.text.toString().trim()
             val email = inputEditEmail.text.toString().trim()
             val password = inputEditPassword.text.toString().trim()
-            val no_telp = inputEditPhoneNum.text.toString().trim()
+            val noTelp = inputEditPhoneNum.text.toString().trim()
+            val jenisKelamin = chooseGender.toString()
             val alamat = inputEditAddress.text.toString().trim()
-            val jenis_kelamin = chooseGender.toString()
 
             if (nama.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty() &&
-                no_telp.isNotEmpty() && alamat.isNotEmpty() && jenis_kelamin.isNotEmpty() ){
-                registerPresenter.register(nama, email, password, no_telp, alamat, jenis_kelamin)
+                noTelp.isNotEmpty() && jenisKelamin.isNotEmpty() && alamat.isNotEmpty()){
+                registerPresenter.register(nama, email, password, noTelp, jenisKelamin, alamat)
             } else {
                 "Harap semua data di isi!"
             }
-
         }
     }
 
@@ -87,11 +86,11 @@ class RegisterActivity : AppCompatActivity(),
     override fun getResponses(success: RegisterResponse?) {
         dialog =
             alert(
-                message = "Registrasi berhasil!, Silahkan Login dahulu",
+                message = "Registrasi berhasil! Silakan login ",
                 title = "Berhasil"
             ) {
                 okButton {
-                    startActivity(intentFor<LoginActivity>("pesan" to "Silahkan Login dahulu"))
+                    startActivity(intentFor<LoginActivity>("pesan" to "Silakan login"))
                     finish()
                 }
 
