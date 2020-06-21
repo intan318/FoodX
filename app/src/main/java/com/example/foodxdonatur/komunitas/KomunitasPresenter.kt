@@ -1,7 +1,6 @@
-package com.example.foodxdonatur.home
+package com.example.foodxdonatur.komunitas
 
 import android.content.Context
-import android.util.Log
 import com.example.foodxdonatur.network.APIFactory
 import com.example.foodxdonatur.network.APIServices
 import kotlinx.coroutines.Dispatchers

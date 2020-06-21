@@ -1,4 +1,4 @@
-package com.example.foodxdonatur.home
+package com.example.foodxdonatur.komunitas
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
