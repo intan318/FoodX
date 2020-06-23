@@ -16,7 +16,7 @@ class UserRepository(private val userDao: UserDao){
         }
     }
 
-    fun deleteAll(){
+    fun deleteAll() {
         DeleteAllUsersAsyncTask(userDao).execute()
     }
 
@@ -36,8 +36,8 @@ class UserRepository(private val userDao: UserDao){
     private class DeleteUserAsyncTask internal constructor(private val mAsyncTaskDao: UserDao) :
             AsyncTask<UserDB, Void, Void>(){
 
-        override fun doInBackground(vararg params: UserDB?): Void? {
-            params[0]?.let { mAsyncTaskDao.delete(it) }
+        override fun doInBackground(vararg params: UserDB): Void? {
+            mAsyncTaskDao.delete(params[0])
             return null
         }
     }

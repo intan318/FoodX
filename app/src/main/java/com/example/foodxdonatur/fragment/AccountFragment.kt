@@ -71,7 +71,7 @@ class AccountFragment : Fragment() {
                       userViewModel.deleteAll()
                       startActivity(intent)
                       activity?.finish()
-//                      toast("Anda sudah keluar akun")
+                      toast("Anda sudah keluar akun")
                   }
                   cancelButton {
                       dialog.dismiss()
@@ -83,7 +83,7 @@ class AccountFragment : Fragment() {
 //        init()
 
     }
-//
+
 //    private fun init() {
 //
 //        if(!SessionManager.getInstance(activity!!).isLoggedIn){

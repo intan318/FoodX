@@ -30,14 +30,16 @@ interface APIServices {
     ): Deferred<Response<UserResponse>>
 
 
+
     @Headers("Accept: application/json")
     @GET("komunitas")
     fun getKomunitas(
-        @Field("name") name: String?,
-        @Field("email") email: String?,
-        @Field("no_telp") noTelp: String?,
-        @Field("alamat") alamat: String?,
-        @Field("foto_komunitas") fotoKomunitas: String?
+        @Header("Authorization") token: String,
+        @Query("name") name: String?,
+        @Query("email") email: String?,
+        @Query("no_telp") noTelp: String?,
+        @Query("alamat") alamat: String?,
+        @Query("foto_komunitas") fotoKomunitas: String?
     ): Deferred<Response<KomunitasResponse>>
 
 

@@ -5,17 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.foodxdonatur.R
 import com.example.foodxdonatur.model.KomunitasResponse
 import kotlinx.android.synthetic.main.card_komunitas.view.*
 
 class KomunitasAdapter(
     private val context: Context,
-    val listener: (KomunitasResponse.Komunitas.User) -> Unit
+    private var komunitaslist: List<KomunitasResponse.Komunitas>,
+    val listener: (KomunitasResponse.Komunitas) -> Unit
 ) :
     RecyclerView.Adapter<KomunitasAdapter.ViewHolder>()
     {
-        private var komunitaslist: MutableList<KomunitasResponse.Komunitas.User> = mutableListOf()
 
         override fun onCreateViewHolder(
             parent: ViewGroup,
@@ -30,10 +31,6 @@ class KomunitasAdapter(
            )
         }
 
-        fun setData(list: MutableList<KomunitasResponse.Komunitas.User>){
-            komunitaslist = list
-            notifyDataSetChanged()
-        }
 
         override fun getItemCount(): Int {
             return komunitaslist.size
@@ -44,12 +41,12 @@ class KomunitasAdapter(
         }
 
         inner class ViewHolder(val containerView: View) : RecyclerView.ViewHolder(containerView) {
-            fun binding(context: Context, komunitas: KomunitasResponse.Komunitas.User, position: Int){
+            fun binding(context: Context, komunitas: KomunitasResponse.Komunitas, position: Int){
 
-                containerView.txtNamaKomunitas.text = komunitas.name
-                containerView.txtLokasiKomunitas.text = komunitas.alamat
+                containerView.txtNamaKomunitas.text = komunitas.user?.name.toString()
+                containerView.txtLokasiKomunitas.text = komunitas.user?.alamat.toString()
 //                containerView.imgKomunitas.let {
-//                    Glide.with(context).load(komunitas.images!![0]?.imageUrl).centerCrop().into(it)
+//                    Glide.with(context).load(komunitas.komunitas.fotoKomunitas).centerCrop().into(it)
 //                }
 
                 containerView.setOnClickListener{

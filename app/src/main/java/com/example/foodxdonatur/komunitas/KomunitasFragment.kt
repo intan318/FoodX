@@ -1,19 +1,26 @@
 package com.example.foodxdonatur.komunitas
 
+import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foodxdonatur.R
 import com.example.foodxdonatur.model.KomunitasResponse
+import com.example.foodxdonatur.utils.DialogView
+import kotlinx.android.synthetic.main.fragment_komunitas.*
 import org.jetbrains.anko.support.v4.intentFor
 
 class KomunitasFragment : Fragment(), KomunitasView {
 
+    private lateinit var dialogView: DialogView
     private lateinit var komunitasPresenter: KomunitasPresenter
     private lateinit var komunitasAdapter: KomunitasAdapter
-    private var listkomunitas: MutableList<KomunitasResponse.Komunitas.User> = mutableListOf()
+//    private var listkomunitas: List<KomunitasResponse.Komunitas.User>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,27 +39,36 @@ class KomunitasFragment : Fragment(), KomunitasView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        komunitasPresenter = KomunitasPresenter(this, this)
-        komunitasPresenter.getKomunitas()
+        dialogView = DialogView(context!! as Activity)
+        komunitasPresenter = KomunitasPresenter(context!!, this)
+//        komunitasPresenter.getKomunitas()
     }
 
-    private fun init(){
-        komunitasAdapter = KomunitasAdapter(context!!) {
-            startActivity(intentFor<DetailKomunitasActivity>())
-        }
 
-    }
 
     override fun isLoading() {
-        TODO("Not yet implemented")
+        dialogView.showProgressDialog()
+
     }
 
     override fun stopLoading() {
-        TODO("Not yet implemented")
+        dialogView.hideProgressDialog()
     }
 
     override fun showKomunitas(data: KomunitasResponse?) {
-        TODO("Not yet implemented")
+
+        if (data != null) {
+            Log.e("terserah", data.komunitas.toString())
+        }
+        komunitasAdapter = KomunitasAdapter(context!!, data?.komunitas!!) {
+            startActivity(intentFor<DetailKomunitasActivity>("komunitas" to it))
+        }
+        val layoutManager = LinearLayoutManager(activity)
+
+        rv_komunitas.layoutManager = layoutManager
+        rv_komunitas.itemAnimator = DefaultItemAnimator()
+        rv_komunitas.adapter = komunitasAdapter
+
     }
 
 }

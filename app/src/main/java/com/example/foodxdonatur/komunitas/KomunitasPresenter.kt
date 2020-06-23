@@ -1,6 +1,7 @@
 package com.example.foodxdonatur.komunitas
 
 import android.content.Context
+import android.util.Log
 import com.example.foodxdonatur.network.APIFactory
 import com.example.foodxdonatur.network.APIServices
 import kotlinx.coroutines.Dispatchers
@@ -21,31 +22,31 @@ class KomunitasPresenter(val context: Context, val view: KomunitasView) {
         email: String? = null,
         noTelp: String? = null,
         alamat: String? = null,
-        fotoKomunitas: String? = null
-    ){
+        fotoKomunitas: String? = null,
+        token : String
+    ) {
+
+        Log.e("KESINI QOY", "RRR")
         view.isLoading()
 
-        doAsync {
-            GlobalScope.launch(Dispatchers.Main){
-                try {
-                  val data = service.getKomunitas(
-                      name = name,
-                      email = email,
-                      noTelp = noTelp,
-                      alamat = alamat,
-                      fotoKomunitas = fotoKomunitas
-                  )
-                  val result = data.await()
-                    uiThread {
-                        view.showKomunitas(result.body())
-                        view.stopLoading()
-                    }
-                } catch (e: Exception){
-                    uiThread {
-                        view.stopLoading()
-                    }
+        GlobalScope.launch(Dispatchers.Main) {
+            try {
+                val data = service.getKomunitas(
+                    name = name,
+                    email = email,
+                    noTelp = noTelp,
+                    alamat = alamat,
+                    fotoKomunitas = fotoKomunitas,
+                    token = "Bearer $token"
+                )
+                val result = data.await()
 
-                }
+                view.showKomunitas(result.body())
+                view.stopLoading()
+
+            } catch (e: Exception) {
+                Log.e("ERROR", e.message.toString())
+                view.stopLoading()
             }
         }
 

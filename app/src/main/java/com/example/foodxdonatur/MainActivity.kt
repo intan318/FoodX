@@ -43,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         bottomNavBar.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        bottomNavBar.selectedItemId = R.id.home
     }
 
     private fun replaceFragment(fragment: Fragment){
