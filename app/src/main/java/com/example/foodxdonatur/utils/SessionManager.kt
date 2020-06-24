@@ -11,7 +11,7 @@ class SessionManager (private var context: Context) {
         get() {
             val sharedPreferences =
                 context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
-            return sharedPreferences.getInt("id", -1) != -1
+            return sharedPreferences.getString("token", null) != null
         }
 
     val user: SharedPreferences
@@ -22,24 +22,24 @@ class SessionManager (private var context: Context) {
             return sharedPreferences
 //           return User(
 //                sharedPreferences.getInt("id", 1),
-//                sharedPreferences.getString("token", null),
+                sharedPreferences.getString("token", null)
 //                sharedPreferences.getInt("status_code", 200),
 //                sharedPreferences.getString("error", null)
 //            )
         }
 
-    fun getIdUser(): Int {
+    fun getToken(): String? {
         val sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
-        val id = sharedPreferences.getInt("id", 1)
-        return id
+        val token = sharedPreferences.getString("token", null)
+        return token
     }
 
-    fun saveUser(user: Int?) {
+    fun saveToken(token: String?) {
 
         val sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
-        user?.let { editor.putInt("id", it) }
-        editor.commit()
+        token?.let { editor.putString("token", it) }
+        editor.apply()
 
     }
 

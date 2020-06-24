@@ -8,8 +8,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
 import java.lang.Exception
 
 class KomunitasPresenter(val context: Context, val view: KomunitasView) {
@@ -23,10 +21,10 @@ class KomunitasPresenter(val context: Context, val view: KomunitasView) {
         noTelp: String? = null,
         alamat: String? = null,
         fotoKomunitas: String? = null,
-        token : String
+        token: String?
     ) {
 
-        Log.e("KESINI QOY", "RRR")
+        Log.e("KESINI OY", "RRR")
         view.isLoading()
 
         GlobalScope.launch(Dispatchers.Main) {
@@ -51,4 +49,5 @@ class KomunitasPresenter(val context: Context, val view: KomunitasView) {
         }
 
     }
+
 }

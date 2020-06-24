@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foodxdonatur.R
 import com.example.foodxdonatur.model.KomunitasResponse
 import com.example.foodxdonatur.utils.DialogView
+import com.example.foodxdonatur.utils.SessionManager
 import kotlinx.android.synthetic.main.fragment_komunitas.*
 import org.jetbrains.anko.support.v4.intentFor
 
@@ -41,14 +42,11 @@ class KomunitasFragment : Fragment(), KomunitasView {
         super.onViewCreated(view, savedInstanceState)
         dialogView = DialogView(context!! as Activity)
         komunitasPresenter = KomunitasPresenter(context!!, this)
-//        komunitasPresenter.getKomunitas()
+        komunitasPresenter.getKomunitas(token = SessionManager.getInstance(context!!).getToken()!!)
     }
-
-
 
     override fun isLoading() {
         dialogView.showProgressDialog()
-
     }
 
     override fun stopLoading() {
@@ -56,9 +54,8 @@ class KomunitasFragment : Fragment(), KomunitasView {
     }
 
     override fun showKomunitas(data: KomunitasResponse?) {
-
         if (data != null) {
-            Log.e("terserah", data.komunitas.toString())
+            Log.e("get komunitas bro", data.komunitas.toString())
         }
         komunitasAdapter = KomunitasAdapter(context!!, data?.komunitas!!) {
             startActivity(intentFor<DetailKomunitasActivity>("komunitas" to it))
@@ -68,7 +65,6 @@ class KomunitasFragment : Fragment(), KomunitasView {
         rv_komunitas.layoutManager = layoutManager
         rv_komunitas.itemAnimator = DefaultItemAnimator()
         rv_komunitas.adapter = komunitasAdapter
-
     }
 
 }

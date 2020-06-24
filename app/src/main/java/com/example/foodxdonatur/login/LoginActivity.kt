@@ -97,14 +97,18 @@ class LoginActivity : AppCompatActivity(),
                 no_telp =  loginResponse.user?.noTelp
             )
             userViewModel.insertUser(user)
-            loginResponse.user?.id?.let { goToHome(it) }
+            loginResponse.accessToken.let {
+                if (it != null) {
+                    goToHome(it)
+                }
+            }
 
         }
     }
 
 
-    private fun goToHome(id: Int) {
-        SessionManager.getInstance(applicationContext).saveUser(id)
+    private fun goToHome(token: String) {
+        SessionManager.getInstance(applicationContext).saveToken(token)
         val intent = Intent(applicationContext, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)

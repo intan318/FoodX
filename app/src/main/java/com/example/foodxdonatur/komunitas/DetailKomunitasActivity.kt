@@ -6,6 +6,9 @@ import com.example.foodxdonatur.R
 
 class DetailKomunitasActivity : AppCompatActivity() {
 
+    private lateinit var detail
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_komunitas)
