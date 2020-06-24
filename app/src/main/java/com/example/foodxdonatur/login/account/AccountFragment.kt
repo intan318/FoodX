@@ -1,4 +1,4 @@
-package com.example.foodxdonatur.fragment
+package com.example.foodxdonatur.login.account
 
 import android.content.DialogInterface
 import android.content.Intent
@@ -7,13 +7,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProviders
-import com.example.foodxdonatur.MainActivity
 import com.example.foodxdonatur.R
 import com.example.foodxdonatur.login.LoginActivity
 import com.example.foodxdonatur.login.UserViewModel
-import com.example.foodxdonatur.register.RegisterActivity
 import com.example.foodxdonatur.utils.DialogView
 import com.example.foodxdonatur.utils.SessionManager
 import kotlinx.android.synthetic.main.fragment_account.*

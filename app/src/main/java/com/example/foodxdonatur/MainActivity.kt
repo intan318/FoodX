@@ -3,7 +3,7 @@ package com.example.foodxdonatur
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.example.foodxdonatur.fragment.AccountFragment
+import com.example.foodxdonatur.login.account.AccountFragment
 import com.example.foodxdonatur.fragment.HistoryFragment
 import com.example.foodxdonatur.komunitas.KomunitasFragment
 import com.example.foodxdonatur.fragment.NotificationFragment
