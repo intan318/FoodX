@@ -28,7 +28,7 @@
             android:layout_marginTop="12dp"
             android:text="Community Name"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             />
 
@@ -40,7 +40,7 @@
             android:layout_marginTop="4dp"
             android:text="Location"
             android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
 
     </RelativeLayout>
