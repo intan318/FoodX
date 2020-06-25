@@ -1,5 +1,6 @@
 package com.example.foodxdonatur.network
 
+import com.example.foodxdonatur.model.DonasiResponse
 import com.example.foodxdonatur.model.KomunitasResponse
 import com.example.foodxdonatur.model.RegisterResponse
 import com.example.foodxdonatur.model.UserResponse
@@ -43,4 +44,27 @@ interface APIServices {
     ): Deferred<Response<KomunitasResponse>>
 
 
+    @FormUrlEncoded
+    @Headers("Accept: application/json")
+    @POST("createdonasi")
+    fun createDonasi(
+       @Field("alamatPenjemputan") alamatPenjemputan: String?,
+       @Field("donatur_id") donaturId: String?,
+       @Field("foto") foto: String?,
+       @Field("komunitas_id") komunitasId: String?,
+       @Field("latitude") latitude: String?,
+       @Field("longitude") longitude: String?,
+       @Field("notes") notes: String?,
+       @Field("waktu_penjemputan") waktuPenjemputan: String?,
+       @Field("bau") bau: String?,
+       @Field("berubahrasa") berubahrasa: String?,
+       @Field("berubahtekstur") berubahtekstur: String?,
+       @Field("berwarna") berwarna: String?,
+       @Field("jamur") jamur: String?,
+       @Field("jumlah") jumlah: String?,
+       @Field("makanan_id") makananId: String?,
+       @Field("tgl_kadaluwarsa") tglKadaluwarsa: String?,
+       @Field("tgl_produksi") tglProduksi: String?,
+       @Field("unit") unit: String?
+    ): Deferred<Response<DonasiResponse>>
 }

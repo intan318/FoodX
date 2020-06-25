@@ -1,21 +1,13 @@
 package com.example.foodxdonatur.komunitas
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.example.foodxdonatur.DonasiActivity
 import com.example.foodxdonatur.R
 import com.example.foodxdonatur.model.KomunitasResponse
 import com.example.foodxdonatur.network.APIFactory
 import com.example.foodxdonatur.utils.DialogView
 import kotlinx.android.synthetic.main.activity_detail_komunitas.*
-import kotlinx.android.synthetic.main.fragment_komunitas.*
-import org.jetbrains.anko.image
-import org.jetbrains.anko.support.v4.intentFor
 
 class DetailKomunitasActivity : AppCompatActivity() {
 

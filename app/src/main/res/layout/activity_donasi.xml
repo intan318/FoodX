@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context=".DonasiActivity">
+    tools:context=".donasi.DonasiActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -32,16 +32,15 @@
             android:textColor="@color/green"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtFormDonasi"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/txtFormDonasi" />
 
         <Spinner
             android:id="@+id/spinnerJenisMakanan"
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:layout_marginTop="4dp"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txtJenisMakanan" />
 
         <TextView
@@ -106,7 +105,7 @@
             app:layout_constraintTop_toBottomOf="@+id/spinnerUnitPorsi" />
 
         <EditText
-            android:id="@+id/editDateProduksi"
+            android:id="@+id/editTglProduksi"
             android:layout_width="156dp"
             android:layout_height="52dp"
             android:layout_marginTop="4dp"
@@ -123,10 +122,10 @@
             android:textColor="@color/green"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editDateProduksi" />
+            app:layout_constraintTop_toBottomOf="@+id/editTglProduksi" />
 
         <EditText
-            android:id="@+id/editDateKadaluwarsa"
+            android:id="@+id/editTglKadaluwarsa"
             android:layout_width="156dp"
             android:layout_height="52dp"
             android:layout_marginTop="4dp"
@@ -143,7 +142,7 @@
             android:textColor="@color/green"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editDateKadaluwarsa" />
+            app:layout_constraintTop_toBottomOf="@+id/editTglKadaluwarsa" />
 
         <com.google.android.material.checkbox.MaterialCheckBox
             android:id="@+id/cbTidakBerwarna"
@@ -209,8 +208,56 @@
             android:textColor="@color/black"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cbTidakBerlendir"
-            />
+            app:layout_constraintTop_toBottomOf="@id/cbTidakBerlendir" />
+
+        <TextView
+            android:id="@+id/txtFotoMakanan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Foto makanan"
+            android:textColor="@color/green"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cbTidakBerjamur" />
+
+        <Button
+            android:id="@+id/buttonChooseFile"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:text="Choose file"
+            android:textAllCaps="false"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txtFotoMakanan" />
+
+        <TextView
+            android:id="@+id/txtNamaFile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nama file"
+            android:layout_marginStart="12dp"
+            app:layout_constraintBottom_toBottomOf="@+id/buttonChooseFile"
+            app:layout_constraintTop_toTopOf="@id/buttonChooseFile"
+            app:layout_constraintStart_toEndOf="@+id/buttonChooseFile" />
+
+        <TextView
+            android:id="@+id/txtWaktuJemput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Waktu penjemputan"
+            android:textColor="@color/green"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonChooseFile" />
+
+        <EditText
+            android:id="@+id/editWaktuJemput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtWaktuJemput" />
 
         <TextView
             android:id="@+id/txtLokasiJemput"
@@ -221,17 +268,34 @@
             android:textColor="@color/green"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cbTidakBerjamur" />
+            app:layout_constraintTop_toBottomOf="@+id/editWaktuJemput" />
 
         <EditText
             android:id="@+id/editLokasiJemput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            app:layout_constraintTop_toBottomOf="@+id/txtLokasiJemput"
             app:layout_constraintStart_toStartOf="parent"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/txtLokasiJemput" />
 
+        <TextView
+            android:id="@+id/txtNotes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Notes"
+            android:textColor="@color/green"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editLokasiJemput" />
+
+        <EditText
+            android:id="@+id/editNotes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtNotes" />
 
         <com.google.android.material.checkbox.MaterialCheckBox
             android:id="@+id/cbPernyataan"
@@ -239,12 +303,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/pernyataan_donasi"
-            android:textSize="14sp"
             android:textColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@id/editLokasiJemput"
-            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editNotes" />
 
         <Button
             android:id="@+id/buttonSubmit"
@@ -252,10 +315,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:text="@string/submit"
-            app:layout_constraintTop_toBottomOf="@id/cbPernyataan"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cbPernyataan" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

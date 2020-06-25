@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DonasiActivity"></activity>
+        <activity android:name=".donasi.DonasiActivity"></activity>
         <activity android:name=".komunitas.DetailKomunitasActivity" />
         <activity android:name=".login.LoginActivity">
             <intent-filter>
