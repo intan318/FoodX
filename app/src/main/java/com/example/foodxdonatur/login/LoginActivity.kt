@@ -120,7 +120,7 @@ class LoginActivity : AppCompatActivity(),
 
             if (SessionManager.getInstance(this).isLoggedIn) {
                 val intent = Intent(applicationContext, MainActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK //biar activity sebelumnya keapus, gabs back lagi
                 startActivity(intent)
             }
         }

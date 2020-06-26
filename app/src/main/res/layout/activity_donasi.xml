@@ -24,35 +24,15 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/txtJenisMakanan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
-            android:text="Jenis makanan"
-            android:textColor="@color/green"
-            android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtFormDonasi" />
-
-        <Spinner
-            android:id="@+id/spinnerJenisMakanan"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:layout_marginTop="4dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txtJenisMakanan" />
-
-        <TextView
             android:id="@+id/txtNamaMakanan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:text="Nama makanan"
             android:textColor="@color/green"
             android:textSize="14sp"
+            android:layout_marginTop="56dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/spinnerJenisMakanan" />
+            app:layout_constraintTop_toBottomOf="@+id/txtFormDonasi" />
 
         <Spinner
             android:id="@+id/spinnerNamaMakanan"
@@ -110,6 +90,7 @@
             android:layout_height="52dp"
             android:layout_marginTop="4dp"
             android:inputType="date"
+            android:enabled="false"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtTglProduksi" />
 

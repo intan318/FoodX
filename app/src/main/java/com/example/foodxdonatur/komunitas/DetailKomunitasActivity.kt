@@ -1,9 +1,12 @@
 package com.example.foodxdonatur.komunitas
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bumptech.glide.Glide
+import com.example.foodxdonatur.MainActivity
 import com.example.foodxdonatur.R
+import com.example.foodxdonatur.donasi.DonasiActivity
 import com.example.foodxdonatur.model.KomunitasResponse
 import com.example.foodxdonatur.network.APIFactory
 import com.example.foodxdonatur.utils.DialogView
@@ -29,6 +32,11 @@ class DetailKomunitasActivity : AppCompatActivity() {
         val photo = APIFactory.BASE_URL_IMAGE+komunitas.fotoKomunitas!!
 
         Glide.with(this).load(photo).into(imgKomunitasDetail)
+
+        buttonDonasi.setOnClickListener {
+            val intent = Intent(applicationContext, DonasiActivity::class.java)
+            startActivity(intent)
+        }
     }
 
 

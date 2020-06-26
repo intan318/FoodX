@@ -1,9 +1,6 @@
 package com.example.foodxdonatur.network
 
-import com.example.foodxdonatur.model.DonasiResponse
-import com.example.foodxdonatur.model.KomunitasResponse
-import com.example.foodxdonatur.model.RegisterResponse
-import com.example.foodxdonatur.model.UserResponse
+import com.example.foodxdonatur.model.*
 import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.*
@@ -29,7 +26,6 @@ interface APIServices {
         @Field("email") email: String,
         @Field("password") password: String
     ): Deferred<Response<UserResponse>>
-
 
 
     @Headers("Accept: application/json")
@@ -67,4 +63,11 @@ interface APIServices {
        @Field("tgl_produksi") tglProduksi: String?,
        @Field("unit") unit: String?
     ): Deferred<Response<DonasiResponse>>
+
+    @Headers("Accept: application/json")
+    @GET("getmakanan")
+    fun getMakanan(): Deferred<Response<MakananResponse>>
+
+
+
 }

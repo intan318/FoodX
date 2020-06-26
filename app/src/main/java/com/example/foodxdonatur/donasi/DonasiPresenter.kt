@@ -48,6 +48,31 @@ class DonasiPresenter(val context: Context, var view:DonasiView) {
         }
     }
 
+    @SuppressLint("SimpleDateFormat")
+    fun makanan() {
 
+        view?.onLoading()
+
+        doAsync {
+            try {
+                runBlocking {
+                    launch(Dispatchers.IO) {
+                        val dataNamaMakanan = service.getMakanan()
+                        val resultNamaMakanan = dataNamaMakanan.await()
+
+                        uiThread {
+                            view?.getMakananResponse(resultNamaMakanan.body())
+                            view?.onFinish()
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                uiThread {
+                    view?.onFinish()
+                    view?.error(e.message.toString())
+                }
+            }
+        }
+    }
 
 }
