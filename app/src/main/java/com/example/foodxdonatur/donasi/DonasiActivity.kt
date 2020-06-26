@@ -27,8 +27,8 @@ class DonasiActivity : AppCompatActivity(), DonasiView {
     private lateinit var dialogView: DialogView
     private lateinit var dialog: DialogInterface
 
-    private var chooseUnit: String? = null
     private val unit = arrayOf("porsi", "kg")
+    private var chooseUnit: String? = null
 
     private var listNamaMakanan: MutableList<MakananResponse.Makanan> = mutableListOf()
 
@@ -40,6 +40,7 @@ class DonasiActivity : AppCompatActivity(), DonasiView {
     val newFormat = SimpleDateFormat(TARGET_DATE_FORMAT, id)
 
     private var realDate = ""
+    private var dateKadaluwarsa = ""
     var idMakanan = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,17 +50,8 @@ class DonasiActivity : AppCompatActivity(), DonasiView {
         dialogView = DialogView(this)
         donasiPresenter = DonasiPresenter(this, this)
         donasiPresenter.makanan()
-    }
+        handleDonasi()
 
-    override fun onLoading() {
-        dialogView.showProgressDialog()
-    }
-
-    override fun onFinish() {
-        dialogView.hideProgressDialog()
-    }
-
-    override fun getResponses(success: DonasiResponse?) {
 
         val calender = Calendar.getInstance()
         val year = calender.get(Calendar.YEAR)
@@ -67,7 +59,8 @@ class DonasiActivity : AppCompatActivity(), DonasiView {
         val day = calender.get(Calendar.DAY_OF_MONTH)
 
         editTglProduksi.setOnClickListener {
-            val dpTglProduksi = DatePickerDialog(this,
+            val dpTglProduksi = DatePickerDialog(
+                this,
                 DatePickerDialog.OnDateSetListener { view, mYear, mMonth, mDay ->
                     editTglProduksi.setText(newFormat.format(simpleBasicDateFormat.parse("$mYear-${mMonth + 1}-$mDay")!!))
                     realDate = "$mYear-${mMonth + 1}-$mDay"
@@ -82,6 +75,46 @@ class DonasiActivity : AppCompatActivity(), DonasiView {
             dpTglProduksi.getButton(DatePickerDialog.BUTTON_NEUTRAL).setTextColor(Color.GREEN)
             dpTglProduksi.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(Color.GREEN)
         }
+
+        editTglKadaluwarsa.setOnClickListener {
+            val dpTglKadaluwarsa = DatePickerDialog(
+                this,
+                DatePickerDialog.OnDateSetListener { view, nYear, nMonth, nDay ->
+                    editTglKadaluwarsa.setText(newFormat.format(simpleBasicDateFormat.parse("$nYear-${nMonth + 1}-$nDay")!!))
+                    dateKadaluwarsa = "$nYear-${nMonth + 1}-$nDay"
+                },
+                year,
+                month,
+                day
+            )
+
+            dpTglKadaluwarsa.show()
+            dpTglKadaluwarsa.getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(Color.GREEN)
+            dpTglKadaluwarsa.getButton(DatePickerDialog.BUTTON_NEUTRAL).setTextColor(Color.GREEN)
+            dpTglKadaluwarsa.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(Color.GREEN)
+        }
+    }
+
+    private fun handleDonasi() {
+
+        buttonSubmit.setOnClickListener {
+
+        }
+
+    }
+
+
+    override fun onLoading() {
+        dialogView.showProgressDialog()
+    }
+
+    override fun onFinish() {
+        dialogView.hideProgressDialog()
+    }
+
+    override fun getResponses(success: DonasiResponse?) {
+        //handle setelag semua field diisi/mencet button submit
+
     }
 
     override fun getMakananResponse(success: MakananResponse?) {
@@ -94,7 +127,7 @@ class DonasiActivity : AppCompatActivity(), DonasiView {
         )
 
         spinnerNamaMakanan.adapter = adapterMakanan
-        spinnerNamaMakanan.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        spinnerNamaMakanan.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
 
             }
@@ -113,7 +146,7 @@ class DonasiActivity : AppCompatActivity(), DonasiView {
         val spinnerUnit = findViewById<Spinner>(R.id.spinnerUnitPorsi)
         val adapterUnit = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, unit)
         spinnerUnit.adapter = adapterUnit
-        spinnerUnit.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        spinnerUnit.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
                 TODO("Not yet implemented")
             }
@@ -128,6 +161,8 @@ class DonasiActivity : AppCompatActivity(), DonasiView {
             }
 
         }
+
+
     }
 
     override fun error(error: String) {
