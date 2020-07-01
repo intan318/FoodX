@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit
 object APIFactory {
     const val BASE_URL: String = "http://192.168.100.147:8000/api/"
     const val BASE_URL_IMAGE: String = "http://192.168.100.147:8000/images/"
+    const val GOOGLE_MAP_URL = "https://maps.googleapis.com/maps/api/"
 
     fun makeRetrofitService(): APIServices {
         return Retrofit.Builder()
@@ -19,6 +20,16 @@ object APIFactory {
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .build().create(APIServices::class.java)
+    }
+
+    fun makeGoogleService(): APIServices {
+        return Retrofit.Builder()
+            .baseUrl(GOOGLE_MAP_URL)
+            .client(makeOkHttpClient())
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
+            .build()
+            .create(APIServices::class.java)
     }
 
     private fun makeOkHttpClient(): OkHttpClient {
