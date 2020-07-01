@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.foodxdonatur.MainActivity
 import com.example.foodxdonatur.R
 import com.example.foodxdonatur.database.UserDB
-import com.example.foodxdonatur.model.UserResponse
+import com.example.foodxdonatur.model.LoginResponse
 import com.example.foodxdonatur.register.RegisterActivity
 import com.example.foodxdonatur.utils.DialogView
 import com.example.foodxdonatur.utils.SessionManager
@@ -86,7 +86,7 @@ class LoginActivity : AppCompatActivity(),
         dialogView.hideProgressDialog()
     }
 
-    override fun getResponses(loginResponse: UserResponse?) {
+    override fun getResponses(loginResponse: LoginResponse?) {
 
         if (loginResponse != null )
         {

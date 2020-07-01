@@ -12,6 +12,9 @@ interface UserDao {
     @Query("SELECT * from users")
     fun getAll(): LiveData<List<UserDB>>
 
+    @Query("SELECT * FROM users LIMIT 1")
+    fun getUser(): UserDB
+
     @Insert()
     fun insert(userDB: UserDB)
 

@@ -9,6 +9,10 @@ class UserRepository(private val userDao: UserDao){
 
     val all: LiveData<List<UserDB>> = userDao.getAll()
 
+    fun getUser(): UserDB{
+        return userDao.getUser()
+    }
+
     @WorkerThread
     fun insert(user: UserDB){
         doAsync {

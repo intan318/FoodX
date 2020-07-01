@@ -3,7 +3,7 @@ package com.example.foodxdonatur.model
 
 import com.google.gson.annotations.SerializedName
 
-data class UserResponse(
+data class LoginResponse(
     @SerializedName("access_token")
     var accessToken: String?,
     @SerializedName("user")

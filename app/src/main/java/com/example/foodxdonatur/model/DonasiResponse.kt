@@ -32,6 +32,8 @@ data class DonasiResponse(
         var notes: String?,
         @SerializedName("status")
         var status: String?,
+        @SerializedName("tgl_penjemputan")
+        var tglPenjemputan: String?,
         @SerializedName("updated_at")
         var updatedAt: String?,
         @SerializedName("waktu_penjemputan")

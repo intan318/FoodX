@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import android.util.Log
 import com.example.foodxdonatur.database.UserDB
 
-class SessionManager (private var context: Context) {
+class SessionManager private constructor(private val context: Context) {
 
     val isLoggedIn: Boolean
         get() {
@@ -63,7 +63,6 @@ class SessionManager (private var context: Context) {
             }
             return mInstance as SessionManager
         }
-
     }
 
 }
