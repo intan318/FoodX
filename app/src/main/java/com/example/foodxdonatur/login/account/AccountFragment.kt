@@ -24,6 +24,7 @@ import kotlinx.android.synthetic.main.fragment_account.*
 import org.jetbrains.anko.cancelButton
 import org.jetbrains.anko.okButton
 import org.jetbrains.anko.support.v4.alert
+import org.jetbrains.anko.support.v4.runOnUiThread
 import org.jetbrains.anko.support.v4.toast
 import java.lang.IllegalArgumentException
 import java.lang.IndexOutOfBoundsException
@@ -69,11 +70,13 @@ class AccountFragment : Fragment(), AccountView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val userViewModel = ViewModelProviders.of(this@AccountFragment).get(UserViewModel::class.java)
+
+        userViewModel = ViewModelProviders.of(this@AccountFragment).get(UserViewModel::class.java)
         dialogView = DialogView(context!! as Activity)
+
+
         accountPresenter = AccountPresenter(context!!, this)
         accountPresenter.getUser(token = SessionManager.getInstance(context!!).getToken()!!)
-
 
         initialUser()
 
@@ -128,11 +131,13 @@ class AccountFragment : Fragment(), AccountView {
     }
 
     override fun onLoading() {
-        dialogView.showProgressDialog()
+       // dialogView.showProgressDialog()
     }
 
     override fun onFinish() {
-        dialogView.hideProgressDialog()
+        runOnUiThread {
+           // dialogView.hideProgressDialog()
+        }
     }
 
     override fun onError(error: String) {

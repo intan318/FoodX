@@ -9,6 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import org.jetbrains.anko.runOnUiThread
 import java.lang.Exception
 
 class AccountPresenter(val context: Context, val view: AccountView){
@@ -27,8 +28,10 @@ class AccountPresenter(val context: Context, val view: AccountView){
                 if (result.code() == 401 || result.body() == null) {
                     view.onFinish()
                 } else {
-                    view.getResponses(result.body())
-                    view.onFinish()
+                    context.runOnUiThread {
+                        view.getResponses(result.body())
+                        view.onFinish()
+                    }
                 }
 
             } catch (e: Exception){
