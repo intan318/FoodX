@@ -23,6 +23,8 @@ class KomunitasFragment : Fragment(), KomunitasView {
     private lateinit var komunitasAdapter: KomunitasAdapter
 //    private var listkomunitas: List<KomunitasResponse.Komunitas.User>
 
+    val idKomunitas = Int
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -58,6 +60,7 @@ class KomunitasFragment : Fragment(), KomunitasView {
             Log.e("get komunitas bro", data.komunitas.toString())
         }
         komunitasAdapter = KomunitasAdapter(context!!, data?.komunitas!!) {
+
             startActivity(intentFor<DetailKomunitasActivity>("komunitas" to it))
         }
         val layoutManager = LinearLayoutManager(activity)

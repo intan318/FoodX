@@ -78,4 +78,13 @@ interface APIServices {
         @Header("Authorization") token: String
     ): Deferred<Response<DonaturResponse>>
 
+
+    //Google API//
+    @Headers("Accept: application/json")
+    @GET("geocode/json")
+    fun getLocation(
+        @Query("latlng") latLong : String,
+        @Query("key") key : String
+    ): Deferred<Response<LocationResponse>>
+
 }

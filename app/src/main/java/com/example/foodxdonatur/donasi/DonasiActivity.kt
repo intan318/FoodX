@@ -12,15 +12,23 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import com.example.foodxdonatur.R
+import com.example.foodxdonatur.komunitas.KomunitasFragment
+import com.example.foodxdonatur.login.LoginActivity
 import com.example.foodxdonatur.login.UserViewModel
 import com.example.foodxdonatur.model.DonasiResponse
+import com.example.foodxdonatur.model.KomunitasResponse
+import com.example.foodxdonatur.model.LocationResponse
 import com.example.foodxdonatur.model.MakananResponse
 import com.example.foodxdonatur.utils.DialogView
 import com.example.foodxdonatur.utils.ImageController
 import com.example.foodxdonatur.utils.ProgressRequestBody
+import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.activity_donasi.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import org.jetbrains.anko.alert
+import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.okButton
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -44,6 +52,8 @@ class DonasiActivity : AppCompatActivity(), DonasiView, ProgressRequestBody.Uplo
     val id = Locale("in", "ID")
     val simpleBasicDateFormat = SimpleDateFormat(DATE_FORMAT_FROM_SERVER, id)
     val newFormat = SimpleDateFormat(TARGET_DATE_FORMAT, id)
+    
+    
 
     private var dateProduksi = ""
     private var dateKadaluwarsa = ""
@@ -54,14 +64,16 @@ class DonasiActivity : AppCompatActivity(), DonasiView, ProgressRequestBody.Uplo
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_donasi)
-
+        
         dialogView = DialogView(this)
 
         imageController = ImageController(this, imgMakanan, this)
 
-        donasiPresenter = DonasiPresenter(this, this, this)
+        donasiPresenter = DonasiPresenter(this, this)
         donasiPresenter.makanan()
 
+        val komunitas = intent.getSerializableExtra("komunitas") as KomunitasResponse.Komunitas
+        
 //        val txtNamaMakanan = spinnerNamaMakanan.selectedItem.toString().trim()
         val txtJumlahMakanan = editTextPorsi.text.toString().trim()
 //        val txtUnitJumlah = spinnerUnitPorsi.selectedItem.toString().trim()
@@ -162,10 +174,10 @@ class DonasiActivity : AppCompatActivity(), DonasiView, ProgressRequestBody.Uplo
             if (cbTidakBerwarna.isChecked && cbTidakBertekstur.isChecked && cbTidakBerasa.isChecked
                 && cbTidakBerbau.isChecked && cbTidakBerbau.isChecked && cbTidakBerjamur.isChecked
                 && cbPernyataan.isChecked) {
-                params["alamatPenjemputan"] = imageController.createPartFromString(txtAlamatPenjemputan)
-//            params["komunitas_id"] = imageController.createPartFromString()
-//            params["latitude"] = imageController.createPartFromString()
-//            params["longitude"] = imageController.createPartFromString()
+                params["alamatPenjemputan"] = imageController.createPartFromString("txtAlamatPenjemputan")
+                params["komunitas_id"] = imageController.createPartFromString(komunitas.id.toString())
+                params["latitude"] = imageController.createPartFromString("sdfhskjafdklasf")
+                params["longitude"] = imageController.createPartFromString("dfkslflskdf")
                 params["notes"] = imageController.createPartFromString(txtNotes)
                 params["tgl_penjemputan"] = imageController.createPartFromString(txtDatePenjemputan)
                 params["waktu_penjemputan"] = imageController.createPartFromString(txtWaktuPenjemputan)
@@ -181,7 +193,8 @@ class DonasiActivity : AppCompatActivity(), DonasiView, ProgressRequestBody.Uplo
                 params["unit"] = imageController.createPartFromString(chooseUnit)
                 val part: MultipartBody.Part? = imageController.getMultiPartBody(imageController.realPath, "foto")
 
-                donasiPresenter
+                donasiPresenter.insertDonasi(params, part)
+
 
             }
 
@@ -199,8 +212,19 @@ class DonasiActivity : AppCompatActivity(), DonasiView, ProgressRequestBody.Uplo
 
     override fun getResponses(success: DonasiResponse?) {
         //handle setelah semua field diisi
+//        if success
+        dialog =
+            alert(
+                message = "Donasi berhasil! ",
+                title = "Berhasil"
+            ) {
+                okButton {
+                    startActivity(intentFor<KomunitasFragment>("pesan" to "Silakan"))
+                    finish()
+                }
 
-
+                setFinishOnTouchOutside(false)
+            }.show()
     }
 
     override fun getMakananResponse(success: MakananResponse?) {
@@ -251,12 +275,16 @@ class DonasiActivity : AppCompatActivity(), DonasiView, ProgressRequestBody.Uplo
 
     }
 
-    override fun error(error: String) {
+    override fun onLocationResult(result: LocationResponse?, originalLatLng: LatLng) {
         TODO("Not yet implemented")
     }
 
+    override fun error(error: String) {
+
+    }
+
     override fun onProgressUpdate(percentage: Int) {
-        TODO("Not yet implemented")
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

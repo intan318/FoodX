@@ -3,24 +3,27 @@ package com.example.foodxdonatur.donasi
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import com.example.foodxdonatur.R
 import com.example.foodxdonatur.model.DonasiResponse
 import com.example.foodxdonatur.network.APIFactory
 import com.example.foodxdonatur.utils.ImageController
 import com.example.foodxdonatur.utils.ProgressRequestBody
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import com.google.android.gms.maps.model.LatLng
+import kotlinx.coroutines.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import java.lang.Exception
 
-class DonasiPresenter(val context: Activity, var view:DonasiView, callback: ProgressRequestBody.UploadCallBacks) {
+class DonasiPresenter(
+    val context: Activity,
+    var view: DonasiView
+) {
 
     private var imageController = ImageController(context, callBackProgress = callback)
     private val service = APIFactory.makeRetrofitService()
+    var googleServiceRepos = APIFactory.makeGoogleService()
 
     var job: Job? = null
 
@@ -114,6 +117,39 @@ class DonasiPresenter(val context: Activity, var view:DonasiView, callback: Prog
                     view?.onFinish()
                     view?.error(e.message.toString())
                 }
+            }
+        }
+    }
+
+
+    fun getLocation(lat: String, lng: String) {
+
+        view.onLoading()
+        GlobalScope.launch(Dispatchers.Main) {
+            try {
+                val data = googleServiceRepos.getLocation(
+                    "$lat, $lng",
+                    context.getString(R.string.MAP_API_KEY)
+                )
+
+                val result = data.await()
+
+                when {
+                    result.code() == 500 -> {
+                        view.onError("Server Error")
+                    }
+                    result.code() == 404 -> {
+                        view.onError("Not Found")
+                    }
+                    else -> {
+                        view.onLocationResult(result.body(), LatLng(lat.toDouble(), lng.toDouble()))
+                    }
+                }
+
+                view.onFinish()
+            } catch (t: Throwable) {
+                view.onError(t.printStackTrace().toString())
+                view.onFinish()
             }
         }
     }

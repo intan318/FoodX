@@ -35,6 +35,7 @@ class DetailKomunitasActivity : AppCompatActivity() {
 
         buttonDonasi.setOnClickListener {
             val intent = Intent(applicationContext, DonasiActivity::class.java)
+            intent.putExtra("komunitas", komunitas)
             startActivity(intent)
         }
     }
