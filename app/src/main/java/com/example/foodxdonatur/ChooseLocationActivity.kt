@@ -14,6 +14,7 @@ import com.example.foodxdonatur.model.LocationResponse
 import com.example.foodxdonatur.model.MakananResponse
 import com.example.foodxdonatur.utils.DialogView
 import com.example.foodxdonatur.utils.GPSChecker
+import com.example.foodxdonatur.utils.ProgressRequestBody
 import com.google.android.gms.common.api.Status
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -28,7 +29,7 @@ import com.google.android.libraries.places.widget.listener.PlaceSelectionListene
 import kotlinx.android.synthetic.main.activity_choose_location.*
 import java.lang.NullPointerException
 
-class ChooseLocationActivity : AppCompatActivity(), OnMapReadyCallback, PlaceSelectionListener {
+class ChooseLocationActivity : AppCompatActivity(), OnMapReadyCallback, PlaceSelectionListener,  ProgressRequestBody.UploadCallBacks {
 
     private lateinit var dialogView: DialogView
     private lateinit var dialog: DialogInterface
@@ -47,6 +48,7 @@ class ChooseLocationActivity : AppCompatActivity(), OnMapReadyCallback, PlaceSel
         setContentView(R.layout.activity_choose_location)
         captureCoordinateGPS()
 
+        dialogView = DialogView(this)
         location = LatLng(coordinateGPS.lat, coordinateGPS.lng)
         locationName = intent.getStringExtra("name")
 
@@ -99,7 +101,7 @@ class ChooseLocationActivity : AppCompatActivity(), OnMapReadyCallback, PlaceSel
 
                 }
 
-            })
+            }, this)
     }
 
 
@@ -197,4 +199,35 @@ class ChooseLocationActivity : AppCompatActivity(), OnMapReadyCallback, PlaceSel
 
     override fun onError(p0: Status) {
     }
+
+    override fun onProgressUpdate(percentage: Int) {
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+        captureCoordinateGPS()
+        map.onStart()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        map.onPause()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        map.onStop()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        map.onLowMemory()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        map.onDestroy()
+    }
+
 }

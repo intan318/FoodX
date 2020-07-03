@@ -18,10 +18,11 @@ import java.lang.Exception
 
 class DonasiPresenter(
     val context: Activity,
-    var view: DonasiView
+    var view: DonasiView,
+    callback: ProgressRequestBody.UploadCallBacks?
 ) {
 
-    private var imageController = ImageController(context, callBackProgress = callback)
+    private var imageController = ImageController(context, callBackProgress = callback!!)
     private val service = APIFactory.makeRetrofitService()
     var googleServiceRepos = APIFactory.makeGoogleService()
 

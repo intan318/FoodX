@@ -8,6 +8,8 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
@@ -15,10 +17,15 @@ import android.os.Bundle
 import android.os.IBinder
 import android.provider.Settings
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.Window
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.foodxdonatur.R
+import kotlinx.android.synthetic.main.dialog_single_form.view.*
 
-class GPSTracker(private var context: Context? = null, private var activity: Context? = null) :
+class GPSTracker(private var context: Context? = null, private var activity: Activity? = null) :
     Service() {
 
     // Flag for GPS status
@@ -185,30 +192,62 @@ class GPSTracker(private var context: Context? = null, private var activity: Con
     }
 
 
-//    /**
-//     * Function to show settings alert dialog.
-//     * On pressing the Settings button it will launch Settings Options.
-//     */
-//    fun showSettingsAlert() {
-//
-//
-//        (activity as BaseActivity).showDialogWithOutCancel(
-//            context?.getString(R.string.gps_title).toString(),
-//            context?.getString(R.string.gps_warning).toString(),
-//            false,
-//            listener = object : AlertDialogInterface {
-//                override fun positiveButtonAction(dialog: DialogInterface, id: Int) {
-//                    val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-//                    (activity as BaseActivity).startActivityForResult(intent, CODE_LOCATION)
-//                }
-//
-//                override fun negativeButtonAction(dialog: DialogInterface, id: Int) {
-//
-//                }
-//
-//            }
-//        )
-//    }
+    fun showDialogWithOutCancel(
+        title: String,
+        content: String,
+        cancelAble: Boolean,
+        positiveText: String = "Ok",
+        listener: AlertDialogInterface
+    ) {
+
+        val factory = LayoutInflater.from(activity)
+        val dialogViewOne =
+            factory.inflate(R.layout.dialog_single_form, null)
+        val dialogOne = AlertDialog.Builder(activity!!).create()
+
+        dialogOne.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialogOne.requestWindowFeature(Window.FEATURE_NO_TITLE)
+
+
+        dialogViewOne.txt_title_form.text = title
+        dialogViewOne.txt_question_form.text = content
+        dialogViewOne.btn_yes.text = positiveText
+
+        dialogViewOne.btn_yes.setOnClickListener {
+            listener.positiveButtonAction(dialogOne, it.id)
+        }
+
+
+        dialogOne.setCancelable(cancelAble)
+        dialogOne.setView(dialogViewOne)
+        dialogOne.show()
+
+    }
+
+    /**
+     * Function to show settings alert dialog.
+     * On pressing the Settings button it will launch Settings Options.
+     */
+    fun showSettingsAlert() {
+
+        showDialogWithOutCancel(
+            context?.getString(R.string.gps_title).toString(),
+            context?.getString(R.string.gps_warning).toString(),
+            false,
+            listener = object : AlertDialogInterface {
+                override fun positiveButtonAction(dialog: DialogInterface, id: Int) {
+                    dialog.dismiss()
+                    val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                    activity?.startActivityForResult(intent, CODE_LOCATION)
+                }
+
+                override fun negativeButtonAction(dialog: DialogInterface, id: Int) {
+
+                }
+
+            }
+        )
+    }
 
 
     override fun onBind(arg0: Intent): IBinder? {

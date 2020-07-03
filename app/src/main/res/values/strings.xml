@@ -5,7 +5,7 @@
     <string name="notifications">Notifications</string>
     <string name="account">Account</string>
 
-    <string name="MAP_API_KEY">AIzaSyCwS9F0LOFfK745jhXuxLSs51tzm7Yb9ZU</string>
+    <string name="MAP_API_KEY">AIzaSyAtkENu4SmTIvSm-14loUHq6DbzBDPSu3A</string>
 
     <string name="full_name">Full Name</string>
     <string name="e_mail">E-mail</string>
@@ -28,6 +28,8 @@
     <string name="submit">Submit</string>
     <string name="image_saved">Image saved</string>
     <string name="fail">Gagal</string>
+    <string name="gps_warning" translatable="false">Tekan OK untuk menyalakan GPS</string>
+    <string name="gps_title" translatable="false">GPS Tidak Aktif!</string>
 
     <string-array name="jenis_kelamin">
         <item>Perempuan</item>

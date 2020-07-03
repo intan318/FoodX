@@ -1,27 +1,28 @@
 package com.example.foodxdonatur.donasi
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
+import com.example.foodxdonatur.ChooseLocationActivity
 import com.example.foodxdonatur.R
 import com.example.foodxdonatur.komunitas.KomunitasFragment
 import com.example.foodxdonatur.login.LoginActivity
 import com.example.foodxdonatur.login.UserViewModel
-import com.example.foodxdonatur.model.DonasiResponse
-import com.example.foodxdonatur.model.KomunitasResponse
-import com.example.foodxdonatur.model.LocationResponse
-import com.example.foodxdonatur.model.MakananResponse
-import com.example.foodxdonatur.utils.DialogView
-import com.example.foodxdonatur.utils.ImageController
-import com.example.foodxdonatur.utils.ProgressRequestBody
+import com.example.foodxdonatur.model.*
+import com.example.foodxdonatur.utils.*
+import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import kotlinx.android.synthetic.main.activity_donasi.*
 import okhttp3.MultipartBody
@@ -39,13 +40,21 @@ class DonasiActivity : AppCompatActivity(), DonasiView, ProgressRequestBody.Uplo
     private lateinit var dialogView: DialogView
     private lateinit var dialog: DialogInterface
 
+    lateinit var coordinateGPS: Coordinate
+
     internal lateinit var imageController: ImageController
 
     private val unit = arrayOf("porsi", "kg")
     private var chooseUnit: String? = null
 
     private var listNamaMakanan: MutableList<MakananResponse.Makanan> = mutableListOf()
+    private val mapKey = "MapViewFoodX"
+    private lateinit var latLong: LatLng
+    private var locationTitle: String? = null
+    private var token: String? = null
 
+    val GPS_CODE_REQUEST = 200
+    val CODE_CHOOSE_LOCATION = 2001
     val DATE_FORMAT_FROM_SERVER = "yyyy-MM-dd"
     val TARGET_DATE_FORMAT = "EEEE, dd MMM yyyy"
 
@@ -53,7 +62,7 @@ class DonasiActivity : AppCompatActivity(), DonasiView, ProgressRequestBody.Uplo
     val simpleBasicDateFormat = SimpleDateFormat(DATE_FORMAT_FROM_SERVER, id)
     val newFormat = SimpleDateFormat(TARGET_DATE_FORMAT, id)
     
-    
+    private var myMap: GoogleMap? = null
 
     private var dateProduksi = ""
     private var dateKadaluwarsa = ""
@@ -64,16 +73,16 @@ class DonasiActivity : AppCompatActivity(), DonasiView, ProgressRequestBody.Uplo
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_donasi)
-        
+        captureCoordinateGPS()
+
         dialogView = DialogView(this)
 
         imageController = ImageController(this, imgMakanan, this)
 
-        donasiPresenter = DonasiPresenter(this, this)
+        donasiPresenter = DonasiPresenter(this, this,  this)
         donasiPresenter.makanan()
 
         val komunitas = intent.getSerializableExtra("komunitas") as KomunitasResponse.Komunitas
-        
 //        val txtNamaMakanan = spinnerNamaMakanan.selectedItem.toString().trim()
         val txtJumlahMakanan = editTextPorsi.text.toString().trim()
 //        val txtUnitJumlah = spinnerUnitPorsi.selectedItem.toString().trim()
@@ -165,6 +174,13 @@ class DonasiActivity : AppCompatActivity(), DonasiView, ProgressRequestBody.Uplo
             tpWaktuJemput.show()
         }
 
+        editLokasiJemput.setOnClickListener {
+            startActivityForResult(
+                Intent(this, ChooseLocationActivity::class.java),
+                CODE_CHOOSE_LOCATION
+            )
+        }
+
         buttonChooseFile.setOnClickListener {
             imageController.requestImageCapturingPermissions()
         }
@@ -202,6 +218,57 @@ class DonasiActivity : AppCompatActivity(), DonasiView, ProgressRequestBody.Uplo
 
     }
 
+//    private fun updateDataDashboard(lat: String, lng: String) {
+//        token = SessionManager.getInstance(this).getToken()
+//        donasiPresenter.getDashboard(
+//            token!!,
+//            lat,
+//            lng,
+//            2
+//        )
+//    }
+
+    private fun makeLongToast(text: String) {
+        runOnUiThread {
+            Toast.makeText(this, text, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun captureCoordinateGPS() {
+        val gpsTracker by lazy { GPSChecker(this, this) }
+
+        coordinateGPS = gpsTracker.check()
+        Log.e("lat,lng orginal", coordinateGPS.lat.toString() + "," + coordinateGPS.lng.toString())
+    }
+
+
+    private fun  afterPermissionGPSRequest(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        if (requestCode == GPS_CODE_REQUEST) {
+            when {
+                grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED -> {
+                    val gps = GPSTracker(this, this)
+                    gps.getLocation()
+                    when {
+                        gps.canGetLocation() -> {
+                            val lat = gps.getLatitude()
+                            val lng = gps.getLongitude()
+                            coordinateGPS =
+                                Coordinate(lat, lng)
+                            //longToast("coordinate  is - \nLat: $lat\nLong: $lng")
+                        }
+                        else -> gps.showSettingsAlert()
+                    }
+                }
+                else -> {
+                    makeLongToast("You need to grant permission")
+                }
+            }
+        }
+    }
     override fun onLoading() {
         dialogView.showProgressDialog()
     }
@@ -290,7 +357,34 @@ class DonasiActivity : AppCompatActivity(), DonasiView, ProgressRequestBody.Uplo
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         imageController.afterCapture(requestCode, resultCode, data)
+
+        if (requestCode == CODE_CHOOSE_LOCATION && resultCode == Activity.RESULT_OK) {
+            if (data != null) {
+                try {
+                    val lat = data.getStringExtra("lat")
+                    val lng = data.getStringExtra("lng")
+                    val name = data.getStringExtra("name")!!
+                    latLong = LatLng(lat!!.toDouble(), lng!!.toDouble())
+                    locationTitle = name
+                    editLokasiJemput.setText(name)
+
+//                    updateDataDashboard(lat, lng)
+                } catch (e: NullPointerException) {
+                    Toast.makeText(this, "Error filter", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == GPS_CODE_REQUEST) {
+
+        }
+    }
 
 }

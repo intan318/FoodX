@@ -11,7 +11,7 @@ import com.example.foodxdonatur.model.Coordinate
 
 class GPSChecker(
     val context: Context,
-    val activity: Context,
+    val activity: Activity,
     private val container: View? = null
 ) {
 

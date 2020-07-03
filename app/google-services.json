@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "740106100176",
+    "firebase_url": "https://gcjsonapi318.firebaseio.com",
+    "project_id": "gcjsonapi318",
+    "storage_bucket": "gcjsonapi318.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:740106100176:android:f6cfd8c98a05cf71236dd5",
+        "android_client_info": {
+          "package_name": "com.example.foodxdonatur"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "740106100176-8mn0uk29rpe07gsrjmingovarjhruiie.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYdtMNaDfPBt6xUKT6TOfbV3oARZWgBQM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "740106100176-8mn0uk29rpe07gsrjmingovarjhruiie.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
