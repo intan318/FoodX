@@ -41,8 +41,7 @@ interface APIServices {
         @Query("foto_komunitas") fotoKomunitas: String?
     ): Deferred<Response<KomunitasResponse>>
 
-
-    @FormUrlEncoded
+    @Multipart
     @Headers("Accept: application/json")
     @POST("createdonasi")
     fun createDonasi(
@@ -64,6 +63,7 @@ interface APIServices {
 //       @Field("tgl_kadaluwarsa") tglKadaluwarsa: String?,
 //       @Field("tgl_produksi") tglProduksi: String?,
 //       @Field("unit") unit: String?
+        @Header("Authorization") token: String,
         @PartMap data: HashMap<String, RequestBody?>,
         @Part foto: MultipartBody.Part?
     ): Deferred<Response<DonasiResponse>>

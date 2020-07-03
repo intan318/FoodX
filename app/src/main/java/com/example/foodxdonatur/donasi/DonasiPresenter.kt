@@ -2,9 +2,8 @@ package com.example.foodxdonatur.donasi
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Context
+import android.util.Log
 import com.example.foodxdonatur.R
-import com.example.foodxdonatur.model.DonasiResponse
 import com.example.foodxdonatur.network.APIFactory
 import com.example.foodxdonatur.utils.ImageController
 import com.example.foodxdonatur.utils.ProgressRequestBody
@@ -29,37 +28,36 @@ class DonasiPresenter(
     var job: Job? = null
 
     fun insertDonasi(
+        token: String?,
         param: HashMap<String, RequestBody?>,
         file: MultipartBody.Part?
 //        datas: List<HashMap<String, String?>>
-    ){
+    ) {
         view.onLoading()
-        doAsync {
-           job = runBlocking {
-               launch(Dispatchers.IO) {
-                   try {
-                       runBlocking {
-                           launch(Dispatchers.IO) {
-                               val data = service.createDonasi(param, file)
-                               val result = data.await()
+        GlobalScope.launch(Dispatchers.IO) {
+            try {
 
-                               uiThread {
-                                   view?.getResponses(result.body())
-                                   view?.onFinish()
-                               }
-                           }
-                       }
 
-                   } catch (e: Exception) {
-                       uiThread {
-                           view?.onFinish()
-                           view?.error(e.message.toString())
-                       }
-                   }
-               }
-           }
+                val data = service.createDonasi(
+                    token = "Bearer $token",
+                    data = param,
+                    foto = file
+                )
+                val result = data.await()
+
+
+                view?.getResponses(result.body())
+                view?.onFinish()
+
+
+            } catch (e: Exception) {
+                view?.onFinish()
+                Log.e("ERROR", e.message.toString())
+                view?.error(e.message.toString())
+            }
         }
     }
+
 
 //    @SuppressLint("SimpleDateFormat")
 //    fun donasi(alamatPenjemputan: String, donaturId: String, foto: String, komunitasId: String,
@@ -154,7 +152,7 @@ class DonasiPresenter(
             }
         }
     }
-
+}
 //    fun uploadFotoMakanan(
 //        param: HashMap<String, RequestBody?>,
 //        file: MultipartBody.Part?,
@@ -176,4 +174,3 @@ class DonasiPresenter(
 //        }
 //    }
 
-}

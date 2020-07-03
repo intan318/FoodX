@@ -30,6 +30,7 @@ import okhttp3.RequestBody
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.okButton
+import org.jetbrains.anko.toast
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -186,14 +187,18 @@ class DonasiActivity : AppCompatActivity(), DonasiView, ProgressRequestBody.Uplo
         }
 
         buttonSubmit.setOnClickListener {
-
+            toast("click")
             if (cbTidakBerwarna.isChecked && cbTidakBertekstur.isChecked && cbTidakBerasa.isChecked
                 && cbTidakBerbau.isChecked && cbTidakBerbau.isChecked && cbTidakBerjamur.isChecked
                 && cbPernyataan.isChecked) {
-                params["alamatPenjemputan"] = imageController.createPartFromString("txtAlamatPenjemputan")
+
+
+                toast("click kirim")
+
+                params["alamat_penjemputan"] = imageController.createPartFromString(locationTitle)
                 params["komunitas_id"] = imageController.createPartFromString(komunitas.id.toString())
-                params["latitude"] = imageController.createPartFromString("sdfhskjafdklasf")
-                params["longitude"] = imageController.createPartFromString("dfkslflskdf")
+                params["latitude"] = imageController.createPartFromString(latLong.latitude.toString())
+                params["longitude"] = imageController.createPartFromString(latLong.longitude.toString())
                 params["notes"] = imageController.createPartFromString(txtNotes)
                 params["tgl_penjemputan"] = imageController.createPartFromString(txtDatePenjemputan)
                 params["waktu_penjemputan"] = imageController.createPartFromString(txtWaktuPenjemputan)
@@ -209,9 +214,11 @@ class DonasiActivity : AppCompatActivity(), DonasiView, ProgressRequestBody.Uplo
                 params["unit"] = imageController.createPartFromString(chooseUnit)
                 val part: MultipartBody.Part? = imageController.getMultiPartBody(imageController.realPath, "foto")
 
-                donasiPresenter.insertDonasi(params, part)
+                token = SessionManager.getInstance(this).getToken()
+                donasiPresenter.insertDonasi(token, params, part)
 
-
+            }else{
+                toast("Kurang")
             }
 
         }
@@ -280,18 +287,21 @@ class DonasiActivity : AppCompatActivity(), DonasiView, ProgressRequestBody.Uplo
     override fun getResponses(success: DonasiResponse?) {
         //handle setelah semua field diisi
 //        if success
-        dialog =
-            alert(
-                message = "Donasi berhasil! ",
-                title = "Berhasil"
-            ) {
-                okButton {
-                    startActivity(intentFor<KomunitasFragment>("pesan" to "Silakan"))
-                    finish()
-                }
 
-                setFinishOnTouchOutside(false)
-            }.show()
+        runOnUiThread {
+            dialog =
+                alert(
+                    message = "Donasi berhasil! ",
+                    title = "Berhasil"
+                ) {
+                    okButton {
+                        startActivity(intentFor<KomunitasFragment>("pesan" to "Silakan"))
+                        finish()
+                    }
+
+                    setFinishOnTouchOutside(false)
+                }.show()
+        }
     }
 
     override fun getMakananResponse(success: MakananResponse?) {
