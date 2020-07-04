@@ -1,32 +1,34 @@
 package com.example.foodxdonatur.history
 
+import android.app.Activity
 import android.os.Bundle
+import android.se.omapi.Session
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.foodxdonatur.R
+import com.example.foodxdonatur.komunitas.DetailKomunitasActivity
+import com.example.foodxdonatur.komunitas.KomunitasAdapter
+import com.example.foodxdonatur.model.HistoryDonasiResponse
+import com.example.foodxdonatur.utils.DialogView
+import com.example.foodxdonatur.utils.SessionManager
+import kotlinx.android.synthetic.main.fragment_history.*
+import kotlinx.android.synthetic.main.fragment_komunitas.*
+import org.jetbrains.anko.support.v4.intentFor
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class HistoryFragment : Fragment(), HistoryDonasiView {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [HistoryFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class HistoryFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var dialogView: DialogView
+    private lateinit var historyDonasiAdapter: HistoryDonasiAdapter
+    private lateinit var historyDonasiPresenter: HistoryDonasiPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
         }
     }
 
@@ -38,23 +40,34 @@ class HistoryFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_history, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HistoryFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HistoryFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        dialogView = DialogView(context!! as Activity)
+        historyDonasiPresenter = HistoryDonasiPresenter(context!!, this)
+        historyDonasiPresenter.getHistoryDonasi(token = SessionManager.getInstance(context!!).getToken()!!)
+
     }
+    override fun isLoading() {
+        dialogView.showProgressDialog()
+    }
+
+    override fun stopLoading() {
+        dialogView.hideProgressDialog()
+    }
+
+    override fun getResponses(data: HistoryDonasiResponse?) {
+        if (data != null) {
+            Log.e("get history donasi", data.donasi.toString())
+        }
+        historyDonasiAdapter = HistoryDonasiAdapter(context!!, data?.donasi!!) {
+
+            startActivity(intentFor<DetailHistoryDonasi>("donasi" to it))
+        }
+        val layoutManager = LinearLayoutManager(activity)
+
+        rv_history_donasi.layoutManager = layoutManager
+        rv_history_donasi.itemAnimator = DefaultItemAnimator()
+        rv_history_donasi.adapter = historyDonasiAdapter
+    }
+
 }

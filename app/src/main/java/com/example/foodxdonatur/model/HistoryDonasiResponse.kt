@@ -6,7 +6,7 @@ import java.io.Serializable
 
 data class HistoryDonasiResponse(
     @SerializedName("donasi")
-    var donasi: List<Donasi?>?
+    var donasi: List<Donasi>?
 ): Serializable {
     data class Donasi(
         @SerializedName("accDonasi")
