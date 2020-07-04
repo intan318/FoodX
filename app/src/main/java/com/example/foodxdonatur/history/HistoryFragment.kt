@@ -1,4 +1,4 @@
-package com.example.foodxdonatur.fragment
+package com.example.foodxdonatur.history
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

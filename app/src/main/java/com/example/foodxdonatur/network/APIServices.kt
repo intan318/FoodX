@@ -79,6 +79,23 @@ interface APIServices {
     ): Deferred<Response<DonaturResponse>>
 
 
+    @Headers("Accept: application/json")
+    @GET("donasidonatur")
+    fun getHistoryDonasi(
+        @Header("Authorization") token: String,
+        @Field("id") donasiId: String?,
+        @Field("komunitas_id") komunitasId: String?,
+        @Field("relawan_id") relawanId: String?,
+        @Field("penerima_id") penerimaId: String?,
+        @Field("alamat_penjemputan") alamatPenjemputan: String?,
+        @Field("tgl_penjemputan") tglPenjemputan: String?,
+        @Field("waktu_penjemputan") waktuPenjemputan: String?,
+        @Field("latitude") latitude: String?,
+        @Field("longitude") longitude: String?,
+        @Field("notes") notes: String?,
+        @Field("foto") foto: String?
+    )
+
     //Google API//
     @Headers("Accept: application/json")
     @GET("geocode/json")

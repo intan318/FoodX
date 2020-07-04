@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
 import com.example.foodxdonatur.ChooseLocationActivity
+import com.example.foodxdonatur.MainActivity
 import com.example.foodxdonatur.R
 import com.example.foodxdonatur.komunitas.KomunitasFragment
 import com.example.foodxdonatur.login.LoginActivity
@@ -65,10 +66,13 @@ class DonasiActivity : AppCompatActivity(), DonasiView, ProgressRequestBody.Uplo
     
     private var myMap: GoogleMap? = null
 
+    private var sdf: SimpleDateFormat? = null
+
     private var dateProduksi = ""
     private var dateKadaluwarsa = ""
     private var datePenjemputan = ""
     private var timePenjemputan = ""
+
     var idMakanan = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -130,6 +134,7 @@ class DonasiActivity : AppCompatActivity(), DonasiView, ProgressRequestBody.Uplo
                 DatePickerDialog.OnDateSetListener { view, nYear, nMonth, nDay ->
                     editTglKadaluwarsa.setText(newFormat.format(simpleBasicDateFormat.parse("$nYear-${nMonth + 1}-$nDay")!!))
                     dateKadaluwarsa = "$nYear-${nMonth + 1}-$nDay"
+                    Log.e("datekdlw", dateKadaluwarsa.toString())
                 },
                 year,
                 month,
@@ -148,6 +153,8 @@ class DonasiActivity : AppCompatActivity(), DonasiView, ProgressRequestBody.Uplo
                 DatePickerDialog.OnDateSetListener { view, pYear, pMonth, pDay ->
                     editHariJemput.setText(newFormat.format(simpleBasicDateFormat.parse("$pYear-${pMonth + 1}-$pDay")!!))
                     datePenjemputan = "pYear-${pMonth + 1}-$pDay"
+
+                    Log.e("datejemput", datePenjemputan.toString())
                 },
                 year,
                 month,
@@ -225,16 +232,6 @@ class DonasiActivity : AppCompatActivity(), DonasiView, ProgressRequestBody.Uplo
 
     }
 
-//    private fun updateDataDashboard(lat: String, lng: String) {
-//        token = SessionManager.getInstance(this).getToken()
-//        donasiPresenter.getDashboard(
-//            token!!,
-//            lat,
-//            lng,
-//            2
-//        )
-//    }
-
     private fun makeLongToast(text: String) {
         runOnUiThread {
             Toast.makeText(this, text, Toast.LENGTH_LONG).show()
@@ -295,7 +292,7 @@ class DonasiActivity : AppCompatActivity(), DonasiView, ProgressRequestBody.Uplo
                     title = "Berhasil"
                 ) {
                     okButton {
-                        startActivity(intentFor<KomunitasFragment>("pesan" to "Silakan"))
+                        startActivity(intentFor<MainActivity>())
                         finish()
                     }
 
