@@ -88,6 +88,7 @@ interface APIServices {
         @Query("relawan_id") relawanId: String?,
         @Query("penerima_id") penerimaId: String?,
         @Query("alamat_penjemputan") alamatPenjemputan: String?,
+        @Query("status") status: String?,
         @Query("tgl_penjemputan") tglPenjemputan: String?,
         @Query("waktu_penjemputan") waktuPenjemputan: String?,
         @Query("latitude") latitude: String?,

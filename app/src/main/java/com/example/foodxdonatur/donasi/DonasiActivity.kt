@@ -75,6 +75,13 @@ class DonasiActivity : AppCompatActivity(), DonasiView, ProgressRequestBody.Uplo
 
     var idMakanan = ""
 
+    val calendar = Calendar.getInstance()
+    val year = calendar.get(Calendar.YEAR)
+    val month = calendar.get(Calendar.MONTH)
+    val day = calendar.get(Calendar.DAY_OF_MONTH)
+    val hour = calendar.get(Calendar.HOUR_OF_DAY)
+    val minute = calendar.get(Calendar.MINUTE)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_donasi)
@@ -87,27 +94,6 @@ class DonasiActivity : AppCompatActivity(), DonasiView, ProgressRequestBody.Uplo
         donasiPresenter = DonasiPresenter(this, this,  this)
         donasiPresenter.makanan()
 
-        val komunitas = intent.getSerializableExtra("komunitas") as KomunitasResponse.Komunitas
-//        val txtNamaMakanan = spinnerNamaMakanan.selectedItem.toString().trim()
-        val txtJumlahMakanan = editTextPorsi.text.toString().trim()
-//        val txtUnitJumlah = spinnerUnitPorsi.selectedItem.toString().trim()
-        val txtDateProduksi = editTglProduksi.text.toString().trim()
-        val txtDateKadaluwarsa = editTglKadaluwarsa.text.toString().trim()
-        val txtDatePenjemputan = editHariJemput.text.toString().trim()
-        val txtWaktuPenjemputan = editWaktuJemput.text.toString().trim()
-        val txtNotes = editNotes.text.toString().trim()
-
-        val txtAlamatPenjemputan = editLokasiJemput.text.toString().trim()
-
-
-        val params = HashMap<String, RequestBody?>()
-
-        val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
-        val hour = calendar.get(Calendar.HOUR_OF_DAY)
-        val minute = calendar.get(Calendar.MINUTE)
 
 
         editTglProduksi.setOnClickListener {
@@ -150,9 +136,9 @@ class DonasiActivity : AppCompatActivity(), DonasiView, ProgressRequestBody.Uplo
         editHariJemput.setOnClickListener {
             val dpTglJemput = DatePickerDialog(
                 this,
-                DatePickerDialog.OnDateSetListener { view, pYear, pMonth, pDay ->
-                    editHariJemput.setText(newFormat.format(simpleBasicDateFormat.parse("$pYear-${pMonth + 1}-$pDay")!!))
-                    datePenjemputan = "pYear-${pMonth + 1}-$pDay"
+                DatePickerDialog.OnDateSetListener { view, mYear, mMonth, mDay ->
+                    editHariJemput.setText(newFormat.format(simpleBasicDateFormat.parse("$mYear-${mMonth + 1}-$mDay")!!))
+                    datePenjemputan = "$mYear-${mMonth + 1}-$mDay"
 
                     Log.e("datejemput", datePenjemputan.toString())
                 },
@@ -194,6 +180,23 @@ class DonasiActivity : AppCompatActivity(), DonasiView, ProgressRequestBody.Uplo
         }
 
         buttonSubmit.setOnClickListener {
+            val komunitas = intent.getSerializableExtra("komunitas") as KomunitasResponse.Komunitas
+//        val txtNamaMakanan = spinnerNamaMakanan.selectedItem.toString().trim()
+            val txtJumlahMakanan = editTextPorsi.text.toString().trim()
+//        val txtUnitJumlah = spinnerUnitPorsi.selectedItem.toString().trim()
+            val txtDateProduksi = dateProduksi
+            val txtDateKadaluwarsa = dateKadaluwarsa
+            val txtDatePenjemputan = datePenjemputan
+            val txtWaktuPenjemputan = timePenjemputan
+            val txtNotes = editNotes.text.toString().trim()
+
+            val txtAlamatPenjemputan = editLokasiJemput.text.toString().trim()
+
+
+            val params = HashMap<String, RequestBody?>()
+
+
+
             toast("click")
             if (cbTidakBerwarna.isChecked && cbTidakBertekstur.isChecked && cbTidakBerasa.isChecked
                 && cbTidakBerbau.isChecked && cbTidakBerbau.isChecked && cbTidakBerjamur.isChecked
@@ -202,22 +205,24 @@ class DonasiActivity : AppCompatActivity(), DonasiView, ProgressRequestBody.Uplo
 
                 toast("click kirim")
 
+
+
                 params["alamat_penjemputan"] = imageController.createPartFromString(locationTitle)
                 params["komunitas_id"] = imageController.createPartFromString(komunitas.id.toString())
                 params["latitude"] = imageController.createPartFromString(latLong.latitude.toString())
                 params["longitude"] = imageController.createPartFromString(latLong.longitude.toString())
                 params["notes"] = imageController.createPartFromString(txtNotes)
-                params["tgl_penjemputan"] = imageController.createPartFromString(txtDatePenjemputan)
-                params["waktu_penjemputan"] = imageController.createPartFromString(txtWaktuPenjemputan)
+                params["tgl_penjemputan"] = imageController.createPartFromString(txtDatePenjemputan) //null
+                params["waktu_penjemputan"] = imageController.createPartFromString(txtWaktuPenjemputan) //null
                 params["bau"] = imageController.createPartFromString(false.toString())
                 params["berubahrasa"] = imageController.createPartFromString(false.toString())
                 params["berubahtekstur"] = imageController.createPartFromString(false.toString())
                 params["berwarna"] = imageController.createPartFromString(false.toString())
                 params["jamur"] = imageController.createPartFromString(false.toString())
-                params["jumlah"] = imageController.createPartFromString(txtJumlahMakanan)
+                params["jumlah"] = imageController.createPartFromString(txtJumlahMakanan) //null
                 params["makanan_id"] = imageController.createPartFromString(idMakanan)
-                params["tgl_kadaluwarsa"] = imageController.createPartFromString(txtDateKadaluwarsa)
-                params["tgl_produksi"] = imageController.createPartFromString(txtDateProduksi)
+                params["tgl_kadaluwarsa"] = imageController.createPartFromString(txtDateKadaluwarsa) //null
+                params["tgl_produksi"] = imageController.createPartFromString(txtDateProduksi) //null
                 params["unit"] = imageController.createPartFromString(chooseUnit)
                 val part: MultipartBody.Part? = imageController.getMultiPartBody(imageController.realPath, "foto")
 

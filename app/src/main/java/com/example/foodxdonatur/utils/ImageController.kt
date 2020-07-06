@@ -53,7 +53,7 @@ class ImageController (
                 override fun onPermissionsChecked(report: MultiplePermissionsReport) {
                     // check if all permissions are granted
                     if (report.areAllPermissionsGranted()) {
-                        val list = listOf("Ambil foto dari kamera", "Ambil foto dari perangkat")
+                        val list = listOf("Ambil foto dari kamera", "Ambil foto dari galeri")
                         activity.selector("Ambil foto makanan", list) { _, which ->
                             when (which) {
                                 0 -> takePhotoFromCamera()

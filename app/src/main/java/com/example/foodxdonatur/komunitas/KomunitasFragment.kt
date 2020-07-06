@@ -57,7 +57,7 @@ class KomunitasFragment : Fragment(), KomunitasView {
 
     override fun showKomunitas(data: KomunitasResponse?) {
         if (data != null) {
-            Log.e("get komunitas bro", data.komunitas.toString())
+            Log.e("get komunitas", data.komunitas.toString())
         }
         komunitasAdapter = KomunitasAdapter(context!!, data?.komunitas!!) {
 
