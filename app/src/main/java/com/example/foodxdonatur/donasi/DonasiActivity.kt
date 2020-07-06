@@ -192,10 +192,7 @@ class DonasiActivity : AppCompatActivity(), DonasiView, ProgressRequestBody.Uplo
 
             val txtAlamatPenjemputan = editLokasiJemput.text.toString().trim()
 
-
             val params = HashMap<String, RequestBody?>()
-
-
 
             toast("click")
             if (cbTidakBerwarna.isChecked && cbTidakBertekstur.isChecked && cbTidakBerasa.isChecked
@@ -204,8 +201,6 @@ class DonasiActivity : AppCompatActivity(), DonasiView, ProgressRequestBody.Uplo
 
 
                 toast("click kirim")
-
-
 
                 params["alamat_penjemputan"] = imageController.createPartFromString(locationTitle)
                 params["komunitas_id"] = imageController.createPartFromString(komunitas.id.toString())

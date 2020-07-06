@@ -36,8 +36,6 @@ class DonasiPresenter(
         view.onLoading()
         GlobalScope.launch(Dispatchers.IO) {
             try {
-
-
                 val data = service.createDonasi(
                     token = "Bearer $token",
                     data = param,

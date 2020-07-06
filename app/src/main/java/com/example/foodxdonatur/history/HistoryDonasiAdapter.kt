@@ -28,7 +28,7 @@ class HistoryDonasiAdapter (
     ): ViewHolder {
         return ViewHolder(
             LayoutInflater.from(context).inflate(
-                R.layout.card_komunitas,
+                R.layout.card_history_donasi,
                 parent,
                 false
             )
@@ -52,7 +52,7 @@ class HistoryDonasiAdapter (
             val photo = APIFactory.BASE_URL_IMAGE+donasi.foto!!
 
             Log.e("Cek foto", photo.toString())
-            containerView.imgKomunitas.let {
+            containerView.imgDonasi.let {
                 Glide.with(context).load(photo).into(it)
             }
 
