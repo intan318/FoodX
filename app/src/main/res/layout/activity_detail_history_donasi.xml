@@ -17,94 +17,154 @@
         app:srcCompat="@drawable/ic_launcher_background" />
 
     <TextView
-        android:id="@+id/txtTglDonasiDetail"
+        android:id="@+id/txtTanggal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Tanggal donasi"
         android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imgDonasiDetail" />
 
     <TextView
-        android:id="@+id/txtAlamatDonasiDetail"
+        android:id="@+id/txtTglDonasiDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:layout_marginStart="8dp"
-        android:text="Alamat donasi"
+        android:layout_marginTop="4dp"
+        android:text="Tanggal donasi"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtTanggal" />
+
+    <TextView
+        android:id="@+id/txtAlamatDns"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Alamat penjemputan"
         android:textColor="@color/black"
         android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTglDonasiDetail" />
+
+    <TextView
+        android:id="@+id/txtAlamatDonasiDetail"
+        android:layout_width="156dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:text="Alamat donasi"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtAlamatDns" />
+
+    <TextView
+        android:id="@+id/txtKomunitasDon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Komunitas"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtAlamatDonasiDetail" />
 
     <TextView
         android:id="@+id/txtDonasiKomunitasDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nama komunitas"
-        android:textSize="14sp"
-        android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/txtAlamatDonasiDetail"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="4dp"
         android:layout_marginStart="8dp"
-        />
+        android:layout_marginTop="4dp"
+        android:text="Nama komunitas"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtKomunitasDon" />
+
+    <TextView
+        android:id="@+id/txtRelawanDns"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Relawan"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtDonasiKomunitasDetail" />
 
     <TextView
         android:id="@+id/txtRelawanDonasiDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="08123456789"
-        android:textSize="14sp"
-        android:textColor="@color/black"
-        app:layout_constraintTop_toBottomOf="@id/txtDonasiKomunitasDetail"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="4dp"
         android:layout_marginStart="8dp"
-        />
+        android:layout_marginTop="4dp"
+        android:text="Nama relawan"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtRelawanDns" />
 
-    <Button
-        android:id="@+id/buttonDonasi"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/txtPenerimaDns"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        android:text="Donasi"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:text="Penerima donasi"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtRelawanDonasiDetail" />
+        app:layout_constraintTop_toBottomOf="@id/txtRelawanDonasiDetail" />
+
+    <TextView
+        android:id="@+id/txtPenerimaDonasiDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:text="Nama penerima donasi"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtPenerimaDns" />
 
     <TextView
         android:id="@+id/txtStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="56dp"
         android:text="Status"
-        android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textColor="@color/red"
+        android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/txtTglDonasiDetail"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/txtTglDonasiDetail"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@id/imgDonasiDetail" />
 
     <TextView
         android:id="@+id/txtStatusDonasi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="64dp"
         android:text="Status"
         android:textColor="@color/black"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/txtStatus"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtStatus"
         app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

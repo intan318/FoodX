@@ -2,12 +2,11 @@ package com.example.foodxdonatur.model
 
 
 import com.google.gson.annotations.SerializedName
-import java.io.Serializable
 
-data class HistoryDonasiResponse(
+data class HisdonResponse(
     @SerializedName("donasi")
-    var donasi: List<Donasi>?
-): Serializable {
+    var donasi: List<Donasi?>?
+) {
     data class Donasi(
         @SerializedName("accDonasi")
         var accDonasi: Boolean?,
@@ -47,7 +46,7 @@ data class HistoryDonasiResponse(
         var updatedAt: String?,
         @SerializedName("waktu_penjemputan")
         var waktuPenjemputan: String?
-    ): Serializable {
+    ) {
         data class Komunitas(
             @SerializedName("created_at")
             var createdAt: String?,
@@ -67,7 +66,7 @@ data class HistoryDonasiResponse(
             var user: User?,
             @SerializedName("user_id")
             var userId: Int?
-        ): Serializable {
+        ) {
             data class User(
                 @SerializedName("alamat")
                 var alamat: String?,
@@ -85,7 +84,7 @@ data class HistoryDonasiResponse(
                 var noTelp: String?,
                 @SerializedName("updated_at")
                 var updatedAt: String?
-            ): Serializable
+            )
         }
 
         data class PenerimaDonasi(
@@ -105,7 +104,7 @@ data class HistoryDonasiResponse(
             var namaPenerima: String?,
             @SerializedName("updated_at")
             var updatedAt: String?
-        ): Serializable
+        )
 
         data class Relawan(
             @SerializedName("agama")
@@ -152,7 +151,7 @@ data class HistoryDonasiResponse(
             var user: User?,
             @SerializedName("user_id")
             var userId: Int?
-        ): Serializable {
+        ) {
             data class User(
                 @SerializedName("alamat")
                 var alamat: String?,
@@ -170,7 +169,7 @@ data class HistoryDonasiResponse(
                 var noTelp: String?,
                 @SerializedName("updated_at")
                 var updatedAt: String?
-            ): Serializable
+            )
         }
     }
 }

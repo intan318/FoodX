@@ -21,6 +21,9 @@ class DetailHistoryDonasi : AppCompatActivity() {
 
         txtTglDonasiDetail.text = donasi.tglPenjemputan.toString()
         txtAlamatDonasiDetail.text = donasi.alamatPenjemputan.toString()
+        txtDonasiKomunitasDetail.text = donasi.komunitas?.user?.name.toString()
+        txtRelawanDonasiDetail.text = donasi.relawan?.user?.name.toString()
+        txtPenerimaDonasiDetail.text = donasi.penerimaDonasi?.namaPenerima.toString()
         txtStatusDonasi.text = donasi.status.toString()
 
         val photo = APIFactory.BASE_URL_IMAGE+donasi.foto!!

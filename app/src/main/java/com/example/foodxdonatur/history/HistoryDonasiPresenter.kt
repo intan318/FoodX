@@ -16,38 +16,38 @@ class HistoryDonasiPresenter(val context: Context, val view: HistoryDonasiView) 
     var job: Job? = null
 
     fun getHistoryDonasi(
-        token: String?,
-        donasiId: String? = null,
-        komunitasId: String? = null,
-        relawanId: String? = null,
-        penerimaId: String? = null,
-        alamatPenjemputan: String? = null,
-        status: String? = null,
-        tglPenjemputan: String? = null,
-        waktuPenjemputan: String? = null,
-        latitude: String? = null,
-        longitude: String? = null,
-        notes: String? = null,
-        foto: String? = null
+        token: String?
+//        donasiId: String? = null,
+//        komunitasId: String? = null,
+//        relawanId: String? = null,
+//        penerimaId: String? = null,
+//        alamatPenjemputan: String? = null,
+//        status: String? = null,
+//        tglPenjemputan: String? = null,
+//        waktuPenjemputan: String? = null,
+//        latitude: String? = null,
+//        longitude: String? = null,
+//        notes: String? = null,
+//        foto: String? = null
     ) {
         view.isLoading()
 
         GlobalScope.launch(Dispatchers.Main){
             try {
                 val data = service.getHistoryDonasi(
-                    token = "Bearer $token",
-                    donasiId = donasiId,
-                    komunitasId = komunitasId,
-                    relawanId = relawanId,
-                    penerimaId = penerimaId,
-                    alamatPenjemputan = alamatPenjemputan,
-                    status = status,
-                    tglPenjemputan = tglPenjemputan,
-                    waktuPenjemputan = waktuPenjemputan,
-                    latitude = latitude,
-                    longitude = longitude,
-                    notes = notes,
-                    foto = foto
+                     token = "Bearer $token"
+//                    donasiId = donasiId,
+//                    komunitasId = komunitasId,
+//                    relawanId = relawanId,
+//                    penerimaId = penerimaId,
+//                    alamatPenjemputan = alamatPenjemputan,
+//                    status = status,
+//                    tglPenjemputan = tglPenjemputan,
+//                    waktuPenjemputan = waktuPenjemputan,
+//                    latitude = latitude,
+//                    longitude = longitude,
+//                    notes = notes,
+//                    foto = foto
                 )
 
                 val result = data.await()

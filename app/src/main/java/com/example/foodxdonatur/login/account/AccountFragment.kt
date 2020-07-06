@@ -31,9 +31,6 @@ import java.lang.IndexOutOfBoundsException
 import java.lang.NullPointerException
 
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
 class AccountFragment : Fragment(), AccountView {
     private lateinit var dialogView: DialogView
     private lateinit var dialog: DialogInterface
@@ -55,17 +52,6 @@ class AccountFragment : Fragment(), AccountView {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_account, container, false)
-    }
-
-    companion object {
-
-        fun newInstance(param1: String, param2: String) =
-            AccountFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
