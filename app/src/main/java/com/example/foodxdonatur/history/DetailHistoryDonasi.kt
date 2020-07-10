@@ -13,7 +13,6 @@ import kotlinx.android.synthetic.main.card_history_donasi.*
 
 class DetailHistoryDonasi : AppCompatActivity() {
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_history_donasi)
@@ -28,10 +27,16 @@ class DetailHistoryDonasi : AppCompatActivity() {
         txtStatusDonasi.text = donasi.status.toString()
 
         val photo = APIFactory.BASE_URL_IMAGE+donasi.foto!!
-        val photoPenerima = APIFactory.BASE_URL_IMAGE+donasi.penerimaDonasi?.foto!!
-        Log.e("Cek penerima", photoPenerima.toString())
 
-        Glide.with(this).load(photo).into(imgDonasiDetail)
-        Glide.with(this).load(photoPenerima).into(imgPenerimaDonasi)
+        if (donasi.foto != null) {
+            try {
+                val photoPenerima = APIFactory.BASE_URL_IMAGE + donasi.penerimaDonasi?.foto!!
+                Log.e("Cek penerima", photoPenerima.toString())
+                Glide.with(this).load(photo).into(imgDonasiDetail)
+                Glide.with(this).load(photoPenerima).into(imgPenerimaDonasi)
+            }catch (e : NullPointerException){
+
+            }
+        }
     }
 }

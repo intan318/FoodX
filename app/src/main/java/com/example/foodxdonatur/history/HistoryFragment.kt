@@ -57,7 +57,7 @@ class HistoryFragment : Fragment(), HistoryDonasiView {
 
     override fun getResponses(data: HistoryDonasiResponse?) {
         if (data != null) {
-            Log.e("get history donasi", data.donasi.toString())
+            Log.e("get history donasi", data.donasi?.size.toString())
         }
         historyDonasiAdapter = HistoryDonasiAdapter(context!!, data?.donasi!!) {
 

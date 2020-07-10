@@ -9,6 +9,6 @@
         android:layout_marginBottom="8dp"
         android:id="@+id/rv_history_donasi"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"/>
 
 </RelativeLayout>

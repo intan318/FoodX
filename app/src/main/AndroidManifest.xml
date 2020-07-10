@@ -18,7 +18,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".history.DetailHistoryDonasi"></activity>
+        <activity android:name=".penerimadonasi.DetailMapPenerimaActivity"></activity>
+        <activity android:name=".history.DetailHistoryDonasi" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

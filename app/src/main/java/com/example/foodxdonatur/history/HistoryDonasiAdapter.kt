@@ -36,7 +36,7 @@ class HistoryDonasiAdapter (
     }
 
     override fun getItemCount(): Int {
-        return donasilist.count()
+        return donasilist.size
     }
 
     override fun onBindViewHolder(holder: HistoryDonasiAdapter.ViewHolder, position: Int) {
