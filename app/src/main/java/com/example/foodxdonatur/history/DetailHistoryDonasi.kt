@@ -2,6 +2,7 @@ package com.example.foodxdonatur.history
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.bumptech.glide.Glide
 import com.example.foodxdonatur.R
 import com.example.foodxdonatur.model.HistoryDonasiResponse
@@ -27,7 +28,10 @@ class DetailHistoryDonasi : AppCompatActivity() {
         txtStatusDonasi.text = donasi.status.toString()
 
         val photo = APIFactory.BASE_URL_IMAGE+donasi.foto!!
+        val photoPenerima = APIFactory.BASE_URL_IMAGE+donasi.penerimaDonasi?.foto!!
+        Log.e("Cek penerima", photoPenerima.toString())
 
         Glide.with(this).load(photo).into(imgDonasiDetail)
+        Glide.with(this).load(photoPenerima).into(imgPenerimaDonasi)
     }
 }

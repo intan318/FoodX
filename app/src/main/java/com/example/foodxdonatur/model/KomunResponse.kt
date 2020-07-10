@@ -2,12 +2,11 @@ package com.example.foodxdonatur.model
 
 
 import com.google.gson.annotations.SerializedName
-import java.io.Serializable
 
-data class KomunitasResponse(
+data class KomunResponse(
     @SerializedName("komunitas")
-    var komunitas: List<Komunitas>
-): Serializable {
+    var komunitas: List<Komunitas?>?
+) {
     data class Komunitas(
         @SerializedName("alamat")
         var alamat: String?,
@@ -39,5 +38,5 @@ data class KomunitasResponse(
         var updatedAt: String?,
         @SerializedName("user_id")
         var userId: Int?
-    ): Serializable
+    )
 }

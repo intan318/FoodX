@@ -181,55 +181,44 @@ class DonasiActivity : AppCompatActivity(), DonasiView, ProgressRequestBody.Uplo
 
         buttonSubmit.setOnClickListener {
             val komunitas = intent.getSerializableExtra("komunitas") as KomunitasResponse.Komunitas
-//        val txtNamaMakanan = spinnerNamaMakanan.selectedItem.toString().trim()
             val txtJumlahMakanan = editTextPorsi.text.toString().trim()
-//        val txtUnitJumlah = spinnerUnitPorsi.selectedItem.toString().trim()
             val txtDateProduksi = dateProduksi
             val txtDateKadaluwarsa = dateKadaluwarsa
             val txtDatePenjemputan = datePenjemputan
             val txtWaktuPenjemputan = timePenjemputan
             val txtNotes = editNotes.text.toString().trim()
 
-            val txtAlamatPenjemputan = editLokasiJemput.text.toString().trim()
-
             val params = HashMap<String, RequestBody?>()
 
-            toast("click")
             if (cbTidakBerwarna.isChecked && cbTidakBertekstur.isChecked && cbTidakBerasa.isChecked
                 && cbTidakBerbau.isChecked && cbTidakBerbau.isChecked && cbTidakBerjamur.isChecked
                 && cbPernyataan.isChecked) {
-
-
-                toast("click kirim")
 
                 params["alamat_penjemputan"] = imageController.createPartFromString(locationTitle)
                 params["komunitas_id"] = imageController.createPartFromString(komunitas.id.toString())
                 params["latitude"] = imageController.createPartFromString(latLong.latitude.toString())
                 params["longitude"] = imageController.createPartFromString(latLong.longitude.toString())
                 params["notes"] = imageController.createPartFromString(txtNotes)
-                params["tgl_penjemputan"] = imageController.createPartFromString(txtDatePenjemputan) //null
-                params["waktu_penjemputan"] = imageController.createPartFromString(txtWaktuPenjemputan) //null
+                params["tgl_penjemputan"] = imageController.createPartFromString(txtDatePenjemputan)
+                params["waktu_penjemputan"] = imageController.createPartFromString(txtWaktuPenjemputan)
                 params["bau"] = imageController.createPartFromString(false.toString())
                 params["berubahrasa"] = imageController.createPartFromString(false.toString())
                 params["berubahtekstur"] = imageController.createPartFromString(false.toString())
                 params["berwarna"] = imageController.createPartFromString(false.toString())
                 params["jamur"] = imageController.createPartFromString(false.toString())
-                params["jumlah"] = imageController.createPartFromString(txtJumlahMakanan) //null
+                params["jumlah"] = imageController.createPartFromString(txtJumlahMakanan)
                 params["makanan_id"] = imageController.createPartFromString(idMakanan)
-                params["tgl_kadaluwarsa"] = imageController.createPartFromString(txtDateKadaluwarsa) //null
-                params["tgl_produksi"] = imageController.createPartFromString(txtDateProduksi) //null
+                params["tgl_kadaluwarsa"] = imageController.createPartFromString(txtDateKadaluwarsa)
+                params["tgl_produksi"] = imageController.createPartFromString(txtDateProduksi)
                 params["unit"] = imageController.createPartFromString(chooseUnit)
                 val part: MultipartBody.Part? = imageController.getMultiPartBody(imageController.realPath, "foto")
 
                 token = SessionManager.getInstance(this).getToken()
                 donasiPresenter.insertDonasi(token, params, part)
-
             }else{
                 toast("Kurang")
             }
-
         }
-
     }
 
     private fun makeLongToast(text: String) {

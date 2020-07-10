@@ -80,7 +80,7 @@ interface APIServices {
 
 
     @Headers("Accept: application/json")
-    @GET("donasidonatur")
+    @GET("historydonasi")
     fun getHistoryDonasi(
         @Header("Authorization") token: String
     ): Deferred<Response<HistoryDonasiResponse>>

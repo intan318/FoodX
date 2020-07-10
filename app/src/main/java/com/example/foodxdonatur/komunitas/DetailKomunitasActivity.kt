@@ -24,10 +24,10 @@ class DetailKomunitasActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detail_komunitas)
         val komunitas = intent.getSerializableExtra("komunitas") as KomunitasResponse.Komunitas
 
-        txtNamaKomunitasDetail.text = komunitas.user?.name.toString()
-        txtAlamatKomunitasDetail.text = komunitas.user?.alamat.toString()
-        txtNoTelpKomunitasDetail.text = komunitas.user?.noTelp.toString()
-        txtEmailKomunitasDetail.text = komunitas.user?.email.toString()
+        txtNamaKomunitasDetail.text = komunitas.name.toString()
+        txtAlamatKomunitasDetail.text = komunitas.alamat.toString()
+        txtNoTelpKomunitasDetail.text = komunitas.noTelp.toString()
+        txtEmailKomunitasDetail.text = komunitas.email.toString()
 
         val photo = APIFactory.BASE_URL_IMAGE+komunitas.fotoKomunitas!!
 

@@ -21,7 +21,7 @@ class KomunitasFragment : Fragment(), KomunitasView {
     private lateinit var dialogView: DialogView
     private lateinit var komunitasPresenter: KomunitasPresenter
     private lateinit var komunitasAdapter: KomunitasAdapter
-//    private var listkomunitas: List<KomunitasResponse.Komunitas.User>
+//    private var listkomunitas: List<KomunitasResponse.Komunitas>
 
     val idKomunitas = Int
 

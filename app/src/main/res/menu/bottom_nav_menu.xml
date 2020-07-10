@@ -14,6 +14,12 @@
         />
 
     <item
+        android:id="@+id/penerimadonasi"
+        android:title="Penerima"
+        android:icon="@drawable/ic_my_penerima_donasi"
+        />
+
+    <item
         android:id="@+id/account"
         android:title="@string/account"
         android:icon="@drawable/ic_action_account"/>

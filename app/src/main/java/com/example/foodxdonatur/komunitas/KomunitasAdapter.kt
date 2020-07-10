@@ -45,8 +45,8 @@ class KomunitasAdapter(
         inner class ViewHolder(val containerView: View) : RecyclerView.ViewHolder(containerView) {
             fun binding(context: Context, komunitas: KomunitasResponse.Komunitas, position: Int){
 
-                containerView.txtNamaKomunitas.text = komunitas.user?.name.toString()
-                containerView.txtLokasiKomunitas.text = komunitas.user?.alamat.toString()
+                containerView.txtNamaKomunitas.text = komunitas.name.toString()
+                containerView.txtLokasiKomunitas.text = komunitas.alamat.toString()
 
                 val photo = APIFactory.BASE_URL_IMAGE+komunitas.fotoKomunitas!!
 

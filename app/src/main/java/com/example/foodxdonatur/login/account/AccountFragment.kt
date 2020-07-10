@@ -69,6 +69,7 @@ class AccountFragment : Fragment(), AccountView {
         buttonSignOut.setOnClickListener {
               dialog = alert("Apakah anda yakin ingin keluar dari akun ini?",
               "Log out"){
+
                   okButton {
                       SessionManager.getInstance(this@AccountFragment.context!!).clear()
                       val intent = Intent(activity, LoginActivity::class.java)
@@ -81,6 +82,7 @@ class AccountFragment : Fragment(), AccountView {
                   cancelButton {
                       dialog.dismiss()
                   }
+
               }.show()
 
         }

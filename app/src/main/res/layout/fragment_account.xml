@@ -15,11 +15,10 @@
             android:id="@+id/txtNL"
             android:layout_width="wrap_content"
             android:layout_height="28dp"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="104dp"
             android:text="@string/nama_lengkap"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -28,26 +27,22 @@
             android:id="@+id/txtNamaLengkap"
             android:layout_width="wrap_content"
             android:layout_height="24dp"
-            android:layout_marginEnd="24dp"
             android:text="@string/nama_lengkap"
             android:textColor="@color/black"
-
-
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/txtNL"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/txtNL"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toTopOf="@id/txtNL"
+            app:layout_constraintBottom_toBottomOf="@id/txtNL"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/txtEm"
             android:layout_width="wrap_content"
             android:layout_height="28dp"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:text="E-mail"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtNL" />
@@ -56,7 +51,6 @@
             android:id="@+id/txtEmailUser"
             android:layout_width="wrap_content"
             android:layout_height="24dp"
-            android:layout_marginEnd="24dp"
             android:text="yourmail@email.com"
             android:textColor="@color/black"
             android:textSize="14sp"
@@ -68,11 +62,10 @@
             android:id="@+id/txtNH"
             android:layout_width="wrap_content"
             android:layout_height="28dp"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:text="Nomor HP"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtEm" />
@@ -81,24 +74,22 @@
             android:id="@+id/txtNoHp"
             android:layout_width="wrap_content"
             android:layout_height="24dp"
-            android:layout_marginEnd="24dp"
             android:text="08123456789"
             android:textColor="@color/black"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/txtNH"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtEm"
+            app:layout_constraintTop_toTopOf="@+id/txtNH"
             app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/txtAddr"
             android:layout_width="wrap_content"
             android:layout_height="28dp"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:text="@string/alamat"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtNH" />
@@ -110,7 +101,7 @@
             android:text="Jalan Melawai no.1, Kebayoran Baru"
             android:textSize="14sp"
             android:textColor="@color/black"
-            android:layout_marginEnd="24dp"
+            android:textAlignment="viewEnd"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtNoHp" />

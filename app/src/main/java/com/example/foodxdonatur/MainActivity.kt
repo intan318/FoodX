@@ -23,11 +23,11 @@ class MainActivity : AppCompatActivity() {
                 replaceFragment(HistoryFragment())
                 return@OnNavigationItemSelectedListener true
             }
-//            R.id.notifications -> {
-//                println("homePressed")
-//                replaceFragment(NotificationFragment())
-//                return@OnNavigationItemSelectedListener true
-//            }
+            R.id.penerimadonasi -> {
+                println("homePressed")
+                replaceFragment(PenerimaDonasiFragment())
+                return@OnNavigationItemSelectedListener true
+            }
             R.id.account -> {
                 println("homePressed")
                 replaceFragment(AccountFragment())
