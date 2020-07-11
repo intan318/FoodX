@@ -27,7 +27,6 @@ class DetailMapPenerimaActivity : AppCompatActivity(), OnMapReadyCallback, Pener
     private var locationName: String? = null
     private val mapKey = "MAP_DETAIL_KEY"
     private lateinit var penerimaDonasiPresenter: PenerimaDonasiPresenter
-//    private var userCovid: MutableList<User> = mutableListOf()
     private var penerimaDonasi: MutableList<PenerimaDonasiResponse.Penerimadonasi> = mutableListOf()
     private var gMaps: GoogleMap? = null
 
@@ -36,6 +35,8 @@ class DetailMapPenerimaActivity : AppCompatActivity(), OnMapReadyCallback, Pener
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_map_penerima)
+
+        dialogView = DialogView(this)
 
         var mapViewBundle: Bundle? = null
         if (savedInstanceState != null) {
@@ -123,7 +124,7 @@ class DetailMapPenerimaActivity : AppCompatActivity(), OnMapReadyCallback, Pener
         if (data.penerimadonasi.isNotEmpty()) {
             penerimaDonasi.addAll(data.penerimadonasi)
         }
-//        map_detail_penerima.getMapAsync(this)
+        map_detail_penerima.getMapAsync(this)
 
 
     }

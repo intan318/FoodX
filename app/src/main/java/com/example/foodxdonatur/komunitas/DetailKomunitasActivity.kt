@@ -22,6 +22,8 @@ class DetailKomunitasActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_komunitas)
+
+        dialogView = DialogView(this)
         val komunitas = intent.getSerializableExtra("komunitas") as KomunitasResponse.Komunitas
 
         txtNamaKomunitasDetail.text = komunitas.name.toString()

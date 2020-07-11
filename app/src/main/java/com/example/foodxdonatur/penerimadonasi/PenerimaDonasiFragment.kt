@@ -97,7 +97,7 @@ class PenerimaDonasiFragment : Fragment(), OnMapReadyCallback, PenerimaDonasiVie
             token = SessionManager.getInstance(context!!).getToken()!!,
             lat = latLong.latitude.toString(),
             lng = latLong.longitude.toString(),
-            radius = 20)
+            radius = 10)
         Log.e("Coordinate", latLong.toString())
 
     }
@@ -109,7 +109,7 @@ class PenerimaDonasiFragment : Fragment(), OnMapReadyCallback, PenerimaDonasiVie
             myMap = map
             myMap?.uiSettings?.isZoomGesturesEnabled = false
             myMap?.uiSettings?.isScrollGesturesEnabledDuringRotateOrZoom = false
-            myMap?.uiSettings?.setAllGesturesEnabled(false)
+//            myMap?.uiSettings?.setAllGesturesEnabled(false)
             myMap?.setMinZoomPreference(11f)
             myMap?.setOnMapClickListener {
                 startActivity<DetailMapPenerimaActivity>(
