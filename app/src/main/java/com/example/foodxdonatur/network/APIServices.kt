@@ -78,12 +78,20 @@ interface APIServices {
         @Header("Authorization") token: String
     ): Deferred<Response<DonaturResponse>>
 
-
     @Headers("Accept: application/json")
     @GET("historydonasi")
     fun getHistoryDonasi(
         @Header("Authorization") token: String
     ): Deferred<Response<HistoryDonasiResponse>>
+
+    @Headers("Accept: application/json")
+    @POST("closestpenerima")
+    fun getPenerimaDonasi(
+        @Header("Authorization") token: String,
+        @Query("latitude") lat: String,
+        @Query("longitude") lng: String,
+        @Query("radius") radius: Int
+    ): Deferred<Response<PenerimaDonasiResponse>>
 
     //Google API//
     @Headers("Accept: application/json")
