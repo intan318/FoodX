@@ -61,8 +61,8 @@ class LoginActivity : AppCompatActivity(),
             }
 
             pass.trim().isEmpty() -> {
-                editTextEmail.error = "Masukan password Anda"
-                editTextEmail.requestFocus()
+                editTextPassword.error = "Masukan password Anda"
+                editTextPassword.requestFocus()
                 false
             }
 
