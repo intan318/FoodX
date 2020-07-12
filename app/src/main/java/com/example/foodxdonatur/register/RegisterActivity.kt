@@ -68,8 +68,50 @@ class RegisterActivity : AppCompatActivity(),
                 noTelp.isNotEmpty() && jenisKelamin.isNotEmpty() && alamat.isNotEmpty()){
                 registerPresenter.register(nama, email, password, noTelp, jenisKelamin, alamat)
             } else {
-                "Harap semua data di isi!"
+                validateRegis(nama, email, password, noTelp, jenisKelamin, alamat)
             }
+        }
+    }
+
+    private fun validateRegis(nama: String, email: String, password: String, noTelp: String,
+                                jenisKelamin: String, alamat: String): Boolean{
+        return when{
+            nama.trim().isEmpty() -> {
+                inputEditFullName.error = "Masukan nama Anda"
+                inputEditFullName.isFocusable = true
+                inputEditFullName.requestFocus()
+                false
+            }
+
+            email.trim().isEmpty() -> {
+                inputEditEmail.error = "Masukan e-mail Anda"
+                inputEditEmail.isFocusable = true
+                inputEditEmail.requestFocus()
+                false
+            }
+
+            password.trim().isEmpty() -> {
+                inputEditPassword.error = "Masukan password Anda"
+                inputEditPassword.isFocusable = true
+                inputEditPassword.requestFocus()
+                false
+            }
+
+            noTelp.trim().isEmpty() ->{
+                inputEditPhoneNum.error = "Masukan nomor telepon Anda"
+                inputEditPhoneNum.isFocusable = true
+                inputEditPhoneNum.requestFocus()
+                false
+            }
+
+            alamat.trim().isEmpty() ->{
+                inputEditAddress.error = "Masukan alamat Anda"
+                inputEditAddress.isFocusable = true
+                inputEditAddress.requestFocus()
+                false
+            }
+
+            else -> true
         }
     }
 

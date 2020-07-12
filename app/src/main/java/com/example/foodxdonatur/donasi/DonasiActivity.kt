@@ -216,7 +216,7 @@ class DonasiActivity : AppCompatActivity(), DonasiView, ProgressRequestBody.Uplo
                 token = SessionManager.getInstance(this).getToken()
                 donasiPresenter.insertDonasi(token, params, part)
             }else{
-                toast("Kurang")
+                toast("Harap isi semua data")
             }
         }
     }
